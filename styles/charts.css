@@ -1,0 +1,14 @@
+/** @format */
+
+.chart-layout {
+	width: 100%;
+	height: 100%;
+	border: solid 1px #499b01;
+	padding: 12px;
+	border-radius: 12px;
+}
+
+.charts-layout {
+	display: block;
+	width: 100%;
+}

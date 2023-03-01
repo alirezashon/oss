@@ -1,0 +1,142 @@
+/** @format */
+
+.personal-page-nav {
+	overflow: hidden;
+	background: linear-gradient(
+		277deg,
+		#499b01,
+		#a5cd39,
+		#a5cd39,
+		#a5cd39,
+		#c3f048,
+		#63ce05
+	);
+	width: 100%;
+	height: 7vh;
+	direction: rtl;
+	padding: 4px 24px 0px 0px;
+	border-radius: 22px;
+}
+
+.personal-page-btns {
+	text-decoration: none;
+	color: #499b01;
+	margin: 0px 17px;
+	padding: 4px 14px;
+	border: solid #499b01 1px;
+	border-radius: 22px;
+	width: 444px;
+	background-color: whitesmoke;
+}
+
+.first-personal-page-btns {
+	margin-right: 66px;
+}
+.split-border{
+    border: solid 1px #499b01;
+    margin:22px 0px;
+    
+}
+/* personal data */
+.personal-data-box {
+	direction: rtl;
+	display: flex;
+	justify-content: space-between;
+}
+.personal-data-profile-top-banner {
+	background: linear-gradient(
+		277deg,
+		#499b01,
+		#a5cd39,
+		#a5cd39,
+		#a5cd39,
+		#c3f048,
+		#63ce05
+	);
+	width: 100%;
+	height: 4vh;
+	margin-bottom: 2vh;
+	border-top-left-radius: 22px;
+	border-top-right-radius: 22px;
+	text-align: center;
+	color: #1f4103;
+	display: flex;
+	justify-content: space-between;
+}
+
+.personal-data-profile-box {
+	border: solid 1px #499b01;
+	border-radius: 22px;
+	margin-top: 2vh;
+	width: 44vh;
+	text-align: center;
+}
+.personal-data-profile-img {
+	border: solid 2px #5dbd09;
+	box-shadow: 1px 1px 1px 1px #b0e352;
+	border-radius: 99vh;
+	width: 16vh;
+	margin-right: 1vh;
+}
+.personal-data-tips {
+	border-bottom: solid 1px #499b01;
+	border-top: solid 1px #a5cd39;
+	padding: 7px 11px;
+	margin-top: 7px;
+	background-color: hsl(78, 97%, 85%);
+	direction: ltr;
+}
+
+/* requests-box */
+.personal-data-requests-box{
+    border: solid 1px #499b01;
+    border-radius: 22px;
+    padding: 22px 0px;
+    width: 50vh;
+    margin-top: 2vh;
+}
+
+
+/* financial */
+.personal-data-financial-box {
+	border: solid 1px #499b01;
+	border-radius: 22px;
+	margin-top: 2vh;
+	width: 107vh;
+	text-align: center;
+}
+.personal-data-logo {
+	opacity: 0.3;
+    position: absolute;
+    bottom: 300px;
+    left: 185px;
+    width: 55vh;
+    z-index: 1;
+}
+.personal-data-profile-financial-first-row-btns{
+    display: flex;
+    justify-content: space-between;
+}
+.personal-data-financial-btns {
+	width: fit-content;
+	padding: 11px;
+	color: whitesmoke;
+	border-radius: 22px;
+	background: linear-gradient(
+		7deg,
+		#499b01,
+		#81cd39,
+		#63ce05
+	);
+    margin:0px 10px 0px 11px;
+    z-index: 2;
+}
+.personal-data-financial-payments-box{
+    margin-top: 222px;
+    border-top : solid 1px #499b01;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+  	background-color: hsl(78, 97%, 85%);
+
+}
+

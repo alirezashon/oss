@@ -1,0 +1,219 @@
+
+.header-box-test {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+  }
+  .header-details-box {
+    display: block;
+    width: max-content;
+    height: fit-content;
+    background-color: #201919;
+    border: solid 1px #499b01;
+    box-shadow: 1px 1px 7px 3px #d0ee7e;
+    border-radius: 11px;
+    border-top-right-radius: 22px;
+    border-top-left-radius: 22px;
+    padding: 0px 0px 44px;
+    margin-top: 11px;
+  }
+  .header-logo {
+    position: absolute;
+    opacity: 0.09;
+    border-radius: 90vh;
+    margin-left: 55vh;
+    margin-top: 25vh;
+    box-shadow: 1px 1px 11px 9px #a5cd39;
+  }
+  .header-details-btns {
+    background-color: #499b01;
+    color: #ffffff;
+    border: solid 3px #a5cd39;
+    box-shadow: 1px 1px 1px 1px #dde6d6, 1px 1px 7px 2px #a5cd39 inset;
+    display: block;
+    direction: rtl;
+    text-decoration: none;
+    padding: 0px 11px;
+    margin: 22px 0px;
+    border-radius: 4px;
+  }
+  .header-details-btns:hover {
+    background-color: #a5cd39;
+    box-shadow: 1px 1px 7px 2px #499b01 inset;
+    color: #ffffff;
+    cursor: pointer;
+  }
+  .head-profile-box {
+    background-color: #202020;
+    width: 166px;
+    height: fit-content;
+    border: solid 0.1px #a5cd39;
+    border-radius: 22px;
+    display: inline-block;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 1px 1px 1px 1px #a5cd39;
+    margin-top: 11px;
+  }
+  .head-profile-box-inner {
+    background: linear-gradient(45deg, #bcf34f, #89b60f, #d4f056, #91bc19);
+    height: 4vh;
+    margin-bottom: 0.7vh;
+    width: 100%;
+    border-top-left-radius: 22px;
+    border-top-right-radius: 22px;
+  }
+  .profile-image {
+    margin: 2px;
+  }
+  
+  .header-profile-box-first-row-btns {
+    display: flex;
+    justify-content: space-around;
+    border-radius: 99px;
+    margin-bottom: 11px;
+  }
+  
+  /* table style */
+  .board-box {
+    width: 77vh;
+    overflow: hidden;
+    height: max-content;
+    background-color: #499b01;
+    border: solid 1px #a5cd39;
+    border-radius: 14px;
+    box-shadow: 1px 1px 11px 1px #a5cd39;
+  }
+  .table-box {
+    z-index: 1;
+    display: block;
+    width: 77vh;
+    overflow-x: scroll;
+    font-size: 14px;
+  }
+  .table-board-label {
+    padding: 7px;
+    text-align: center;
+    color: #ffffff;
+  }
+  .table {
+    background-color: #ffffff;
+  }
+  .td {
+    width: fit-content;
+    border: solid 1px #89b60f;
+  }
+  .td:hover {
+    background: #499b01;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  /* contet style */
+  .dashboard-main-page {
+    margin-top: -33vh;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .oss-dashboard-row {
+    margin: 44px;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+    
+  .oss-dashboard-row-first-line {
+    margin-top: -33vh;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+  
+  .oss-dashboard-content{
+    display: flex;
+    justify-content: space-around;
+    direction: rtl;
+    margin-top: -22vh;
+  }
+  .oss-dashbnoard-right-coloumn  .oss-dashboard-left-coloumn{
+    display: block;
+    width: 44%;
+    padding: 7px;
+  }
+.oss-dashboard-chart-box{
+  background-color: #ffffff;
+  border: solid 2px #499b01;
+  border-radius: 11px;
+  margin: 33px 0px;
+}
+
+
+
+
+
+
+/* TICKETING STYLES */
+
+.OSS-ticketing-layout-row {
+	width: 96.6%;
+	margin: 23px 9px;
+	padding: 11px;
+	border-bottom: solid 1px #499b01;
+	border-radius: 11px;
+	box-shadow: 1px 1px 3px 1px #499b01;
+	display: flex;
+	justify-content: space-between;
+}
+.oss-ticketing-layout-dynamic-form-box{
+  display: block;
+  width: 96.6%;
+	margin: 23px 9px;
+	padding: 11px;
+	border-bottom: solid 1px #499b01;
+	border-radius: 11px;
+	box-shadow: 1px 1px 3px 1px #499b01;
+	justify-content: space-between;
+}
+
+.oss-dashboard-box{
+  border:  solid 11px #a5cd39;
+  width: 90%;
+  display: inline-block;
+  margin-left: 5%;
+  height: 100vh;
+
+}
+.oss-dashboard-header{
+  display: flex;
+  justify-content: center;
+  color: #FFFFFF;
+  text-align: center;
+  background-color: #499b01;
+  height: 6vh;
+}
+
+.oss-dashboard-content{
+  display: flex;
+  flex-direction: row;
+  margin-top: 0px;
+  height: 100vh;
+  
+}
+.oss-dashboard-center-chart-box{
+width: 48vh; 
+/* position: absolute; */
+align-self: center;
+flex: 0.3;
+background-color: #eef5ca;
+border-radius: 44px;
+}
+.oss-dashboard-star-box{
+  flex: 0.3;
+ justify-content: center;
+  height: fit-content;
+  width: fit-content;
+}
+
+

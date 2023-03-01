@@ -1,0 +1,80 @@
+/**
+ * nav
+ *
+ * @format
+ */
+
+.Link {
+	text-decoration: none;
+	color: #ffffff;
+	padding: 3px 11px;
+	border-radius: 12px;
+}
+.Link:hover {
+	color: #9af03e;
+	background-color: #499b01;
+}
+
+.search-btn {
+	border-radius: 80%;
+	color: #000;
+}
+.navigation {
+	background: linear-gradient(
+		277deg,
+		#499b01,
+		#a5cd39,
+		#a5cd39,
+		#a5cd39,
+		#c3f048,
+		#63ce05
+	);
+	font-weight: bold;
+	direction: rtl;
+	font-family: Tanha;
+	font-size: 22px;
+	border-bottom: #499b01 1px solid;
+}
+.top-nav-items {
+	background-color: #fff;
+	margin-left: 17%;
+	text-align: center;
+	color: #499b01;
+}
+.menu-items {
+	text-decoration: none;
+	color: #ffffff;
+}
+.logo {
+	width: 131px;
+	border-radius: 77px;
+	opacity: 0.4;
+}
+.search-options {
+	font-size: 44px;
+	background: #499b01;
+}
+
+.search-options-box {
+	box-shadow: 0px 0px 7px 1px #499b01;
+	background: linear-gradient(
+		277deg,
+		#499b01,
+		#a5cd39,
+		#a5cd39,
+		#a5cd39,
+		#c3f048,
+		#63ce05
+	);
+	justify-content: space-between;
+	width: 130vh;
+}
+.calender-box {
+	align-items: center;
+	background-color: #a9cf41;
+	margin-left: 111px;
+	padding: 0 12px;
+	padding-top: 11px;
+	border-radius: 22px;
+}
+/*end-ofnav*/

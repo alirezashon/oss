@@ -1,0 +1,35 @@
+/**
+ * table
+ *
+ * @format
+ */
+
+.board-box {
+	width: 100%;
+	height: 222px;
+	overflow: scroll;
+}
+/* end-of-table */
+
+/* editor-screen */
+
+.send-mail-btns {
+	display: flex;
+	justify-content: space-between;
+}
+
+/* end-of-editor-screen */
+
+/*dashboard-content*/
+.first-row{
+width: 100%;
+display: flex;
+justify-content: space-around;
+}
+.chart-box {
+	height: fit-content;
+	display: flex;
+	padding: 7px;
+	border: solid 1px #499b01;
+}
+/*end-of-dashboard-content*/

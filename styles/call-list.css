@@ -1,0 +1,32 @@
+
+.call-list-page{
+
+    display: grid;
+    border-radius: 22px;
+   	background: linear-gradient(
+		277deg,
+		#499b01,
+		#a5cd39,
+		#a5cd39,
+		#a5cd39,
+		#c3f048,
+		#63ce05
+	); 
+}
+#call-list-labels{
+    background-color: #499b01;
+    color: whitesmoke;
+}
+.call-list-details{
+    display: flex;
+    justify-content: space-around;   color: #fb6400;
+}
+
+
+
+
+
+
+
+
+

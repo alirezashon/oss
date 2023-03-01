@@ -1,0 +1,122 @@
+/** @format */
+
+.auth-box {
+	margin: 7vh 55vh;
+	border: solid 1px #499b01;
+	display: inline-block;
+	justify-content: center;
+	align-items: center;
+	padding: 10vh;
+	cursor: pointer;
+	background: linear-gradient(
+		277deg,
+		#499b01,
+		#a5cd39,
+		#a5cd39,
+		#a5cd39,
+		#c3f048,
+		#73d51d
+	);
+	box-shadow: 1px 1px 3px 2px #3e6803;
+	border-bottom-left-radius: 22vh;
+	border-top-right-radius: 22vh;
+}
+.auth-inner-box {
+	background: linear-gradient(
+		250deg,
+		#d7fa75 7%,
+		#dbf8ae 30%,
+		#d2f37a 85%,
+		#d9f786 100%
+	);
+	box-shadow: 1px 1px 3px 2px #6aac0e;
+	border-radius: 11px;
+	padding: 3vh;
+	overflow: hidden;
+}
+.auth-logo {
+	margin: 11px 33px;
+	opacity: 0.7;
+	width: 50vh;
+	border-radius: 3vh;
+	box-shadow: 1px 1px 7px 1px #9efb33;
+}
+.auth-logo:hover {
+	opacity: 0.9;
+}
+
+.auth-form {
+	justify-content: center;
+	display: block;
+}
+.auth-form-row {
+	display: block;
+	justify-content: center;
+	border: #c3ec51 solid 1px;
+	box-shadow: 1px 1px 1px 1px #9efb33;
+	border-radius: 7px;
+	padding: 16px;
+	margin: 10px 0px;
+	/* background-color: #a5cd39; */
+	background: linear-gradient(
+		150deg,
+		#cbf35e -7%,
+		#f4fab5 50%,
+		#e3faa4 60%,
+		#c7e96b 100%
+	);
+}
+
+.auth-input {
+	display: block;
+	border: solid 1px #499b01;
+	border-radius: 9px;
+	padding: 7px;
+	margin: 22px 7px;
+	width: 50vh;
+}
+.auth-input:focus {
+	outline: none !important;
+	border: 1px solid red;
+	box-shadow: 1px 1px 3px 1px #499b01;
+	border: solid 2px #a5cd39;
+}
+.auth-input::placeholder {
+	color: #3e6803;
+}
+.auth-input:hover {
+	transform: scale(1.02, 1.01);
+}
+
+.auth-btns-box {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+.auth-form-submit {
+	background: linear-gradient(
+		2deg,
+		#91dc4f,
+		#c2eb51,
+		#a5cd39,
+		#a5cd39,
+		#c3f048,
+		#63ce05
+	);
+	border: 1.6px solid #499b01;
+	color: #023d12;
+	border-radius: 7px;
+	padding: 4px 9px;
+	margin-top: 11px;
+	box-shadow: 1px 1px 1px 1px #499b01;
+	text-decoration: none;
+}
+
+.auth-form-submit:hover {
+	color: #3d6508;
+	transform: rotate(-0.7deg) translateX(-1px) translateY(-1px);
+}
+
+.auth-form-submit:last-child:hover {
+	transform: rotate(0.7deg) translateX(1px) translateY(-1px);
+}

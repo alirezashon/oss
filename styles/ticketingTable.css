@@ -1,0 +1,33 @@
+/** @format */
+
+.ticketing-table-header {
+	border: solid 1px #a5cd39;
+	height: 44px;
+	color: #193500;
+	font-weight: bold;
+    text-align: center;
+    padding: 11px;
+    width: 100%;
+    background: linear-gradient(45deg , #bcf34f , #89b60f ,#d4f056 , #91bc19);
+}
+.ticketing-table {
+	border: solid 1px #499b01;
+}
+.ticketing-thead {
+	border: solid 1px #499b01;
+}
+.ticketing-table-head-row {
+	border: solid 1px #499b01;
+}
+.ticketing-table-head {
+	text-align: center;
+	padding: 0px 33px;
+	border: solid 1px #499b01;
+}
+.ticketing-table-rows {
+	border: solid 1px #499b01;
+}
+.ticketing-table-row-cel {
+	text-align: center;
+	border: solid 1px #499b01;
+}

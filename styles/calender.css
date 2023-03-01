@@ -1,0 +1,44 @@
+.calender-table-box{
+    width: 55vh;
+    margin-left: 1%;
+    cursor: pointer;
+}
+
+.calender-table-month-year-row{
+    text-align: center;
+    border: solid 1px #346b03;
+    background: linear-gradient(45deg , #bcf34f , #89b60f ,#d4f056 , #91bc19);
+    color: #2c5408;
+}
+.calender-table-month-year:hover{
+transform: scale(1.1,1.1);
+color: #fafbf8;
+}
+.calender-table-head{
+    text-align: center;
+background: linear-gradient(45deg , #57b703 , #a5cd39);
+    color: aliceblue;
+    border:  solid 1px #499b01;
+}
+.calender-table-head-cel{
+    text-align: center;
+    border:  solid 1px #a5cd39;
+}
+.calender-table-column{
+border: solid 1px #499b01;
+background: linear-gradient(45deg , #d5fab3 , #e8fdad ,#dcfbbe , #e8fdad );
+color: #1f4002;
+}
+.calender-table-cel{
+border: solid 1px #499b01;
+width: fit-content;
+text-align: center;
+}
+.calender-table-cel:hover{
+background-color: #61be10;
+color: whitesmoke;
+border-radius: 7px;
+transform: scale(1.03,1.07);
+}
+
+

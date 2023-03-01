@@ -1,0 +1,72 @@
+/**
+ * Header
+ *
+ * @format
+ */
+
+.header-box {
+	direction: rtl;
+	display: flex;
+	padding: 12px 7px;
+	justify-content: space-between;
+	margin: 20px 2px;
+	border: solid 1px #499b01;
+	border-radius: 11px;
+	box-shadow: 1px 1px 1px 1px #499b01;
+}
+
+.profile-box {
+	width: fit-content;
+	border: solid 0.1px #a5cd39;
+	border-radius: 22px;
+	display: inline-block;
+	justify-content: center;
+	text-align: center;
+	box-shadow: 1px 1px 1px 1px #a5cd39;
+}
+.profile-box-header{
+    background: linear-gradient(45deg , #bcf34f , #89b60f ,#d4f056 , #91bc19);
+	height: 4vh;
+	margin-bottom: 0.7vh;
+	width: 100%;
+	border-top-left-radius: 22px;
+	border-top-right-radius: 22px;
+}
+.profile-image {
+	animation: profile 0.3s;
+	width: 17vh;
+	border: solid 1px #499b01;
+	box-shadow: 1px 1px 3px 1px #b2e155;
+	border-radius: 100%;
+}
+
+.profile-btns-box {
+	display: block;
+	padding: 11px;
+}
+.profile-btns-rows {
+	margin: 7px 11px;
+	display: flex;
+}
+.drawer-btn {
+    background: linear-gradient(5deg , #bcf34f , #89b60f ,#d4f056 , #91bc19);
+	padding: 7px 14px;
+	width: fit-content;
+	margin: 7px;
+	border: solid 2px #ffffff;
+}
+.notification-btn {
+    background: linear-gradient(5deg , #bcf34f , #89b60f ,#d4f056 , #91bc19);
+	padding: 7px 14px;
+	margin: 7px;
+	width: fit-content;
+	border: solid 2px #ffffff;
+}
+/* end-of-profile */
+.header-ticketing-box{
+	width:90vh;
+	height: 38vh;
+	border: solid 1px #499b01;
+	border-radius: 1vh;
+	overflow: scroll;
+}

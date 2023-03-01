@@ -1,0 +1,24 @@
+.dynamic-form-box {
+  height: 444px;
+  margin-top: 44px;
+}
+.dynamic-form-select{
+  background: linear-gradient(
+		3deg,
+		#499b01,
+		#a5cd39,
+		#a5cd39,
+		#a5cd39,
+		#c3f048,
+		#63ce05
+	);
+  border: solid 2px #e6ffd1;
+  box-shadow: 1px 1px 5px 1px #387404;
+  color: #FFFFFF;
+  border-radius: 11px;
+}
+.dynamic-form-options{
+  background-color: #a5cd39;
+  text-align: center;
+ 
+}

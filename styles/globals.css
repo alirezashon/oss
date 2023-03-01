@@ -1,0 +1,76 @@
+
+/** @format */
+
+@font-face {
+	font-family: Tanha;
+	src: url('./font/Tanha.ttf');
+}
+
+@keyframes profile {
+	0% {
+		margin-right: -200px;
+	}
+	25% {
+		margin-right: -150px;
+	}
+	50% {
+		margin-right: -100px;
+	}
+	75% {
+		margin-right: -50px;
+	}
+}
+
+body {
+	overflow-x: hidden;
+	background: #000000;
+}
+* {
+	font-family: Tanha;
+
+}
+
+::-webkit-scrollbar {
+	width: 7px;
+	height: 11px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 5px grey;
+	border-radius: 4px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #a5cd39;
+	border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #499b01;
+}
+
+/* .board-box::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+  
+  .board-box::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 7px;
+  }
+   
+  .board-box::-webkit-scrollbar-thumb {
+    background: #499b01; 
+    border-radius:7px;
+  }
+  
+  .board-box::-webkit-scrollbar-thumb:hover {
+    background: #a5cd39; 
+  }
+   */
+.testost{
+	background-color: #499b01;
+}

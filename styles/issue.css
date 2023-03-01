@@ -1,0 +1,27 @@
+.issue-view-screen{
+    display: grid;
+    height: 333vh;
+}
+.issue-details{
+    width: 100%;
+    color: #FFFFFF;
+    padding: 2vh;
+   display: grid;
+}
+.issue-labels{
+    background-color: #499b01;
+    width: 100%;
+    padding: 4px 3vh;
+    border: solid 1px #a5cd39;
+    border-radius: 0vh  222vh;
+    margin: 0vh 3vh;
+}
+.issue-labels-value{
+    background-color:#a5cd39 ;
+    padding: 4px 3vh;
+    border: solid 1px #499b01;
+    border-radius: 222vh  0vh;
+}
+.issue-people{
+    display: block;
+}

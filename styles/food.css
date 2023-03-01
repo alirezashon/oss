@@ -1,0 +1,27 @@
+/** @format */
+.food-banner-box{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    
+}
+.food-page {
+	width: 150vh;
+}
+.food-banner{
+	background: linear-gradient(45deg, #bcf34f, #89b60f, #d4f056, #91bc19);
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2vh;
+}
+
+.food-date-box{
+    direction: rtl;
+}
+
+
+
+
+
+
+

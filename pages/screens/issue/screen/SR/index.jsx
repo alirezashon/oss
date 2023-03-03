@@ -1,6 +1,7 @@
 /** @format */
 import Layout from '../../screen'
 import moment from 'jalali-moment'
+import Image from 'next/image'
 
 export default function index({ props }) {
 	const hejriCreatedTime = moment().locale('fa').format('YYYY/MM/DD')
@@ -76,10 +77,14 @@ export default function index({ props }) {
 							<div className='screen-approv-first-row'>
 								<label className='approv-name-label'>reporter</label>
 								<div className='approv-img-name-box'>
-									<img
-										src={props.reporterIcon}
-										className='approv-img'
-									/>
+									{reporterIcon && (
+										<Image
+											src={reporterIcon}
+											width={48}
+											height={48}
+											className='approv-img'
+										/>
+									)}
 									<p className='approve-name'>{props.reporter}</p>
 								</div>
 							</div>
@@ -93,16 +98,17 @@ export default function index({ props }) {
 					<div className='screen-details-row'>
 						<div className='screen-detail-field-show'>
 							<label className='details-key'>Type:</label>
-              <label className='details-value'>{props.type}</label>
+							<label className='details-value'>{props.type}</label>
 						</div>
 
 						<div className='screen-detail-field-show'>
 							<label className='details-key'>Priority:</label>
-              <label className='details-value'>{props.priority}
-                <label className='details-value'>
-                <img src={props.priorityIcon}/>
-                </label>
-              </label>
+							<label className='details-value'>
+								{props.priority}
+								<label className='details-value'>
+									<img src={props.priorityIcon} />
+								</label>
+							</label>
 						</div>
 
 						<div className='screen-detail-field-show'>
@@ -114,7 +120,7 @@ export default function index({ props }) {
 					<div className='screen-details-row'>
 						<div className='screen-detail-field-show'>
 							<label className='details-key'>Labels:</label>
-              <label className='details-value'>{props.labels}</label>
+							<label className='details-value'>{props.labels}</label>
 						</div>
 
 						<div className='screen-detail-field-show'>

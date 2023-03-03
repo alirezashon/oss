@@ -49,7 +49,7 @@ function MyD3Component() {
 		]
 		const total = obj.total
 		console.log(total)
-		const data = generateSequence(36, [])
+		const data = generateSequence(6936, [])
 
 		const boardLabel = svg
 			.append('rect')
@@ -179,7 +179,7 @@ function MyD3Component() {
 			<svg
 				ref={svgRef}
 				width='100%'
-				height='888vh'>
+				height='99888vh'>
 			</svg>
 			{issues.map(issue => (
 				<p className='text-white'>{ issue.key}</p>

@@ -5,8 +5,8 @@ import * as d3 from 'd3'
 import { useState, useEffect, useRef } from 'react'
 export default function index() {
 	const svgRef = useRef()
-    const [x,setX] = useState()
-    
+	const [x, setX] = useState()
+
 	const leftLine = [
 		{ x: 222, y: 144 },
 		{ x: 111, y: 166 },
@@ -43,7 +43,6 @@ export default function index() {
 				RX: centerX,
 				RY: centerY / 4 - boardLabelHeight + boardLabelHeight + 33,
 			},
-	
 		]
 
 		const boardLabel = svg
@@ -60,7 +59,7 @@ export default function index() {
 					.attr('x', centerX + 99)
 					.attr('y', centerY / 4 - boardLabelHeight + boardLabelHeight + 77)
 					.attr('width', boardLabelWidth)
-					.attr('height', boardLabelHeight/1.3)
+					.attr('height', boardLabelHeight / 1.3)
 					.style('fill', '#a5cd39')
 				// --------left----rect
 
@@ -69,7 +68,7 @@ export default function index() {
 					.attr('x', centerX - 99 - boardLabelWidth)
 					.attr('y', centerY / 4 - boardLabelHeight + boardLabelHeight + 77)
 					.attr('width', boardLabelWidth)
-					.attr('height', boardLabelHeight/1.3)
+					.attr('height', boardLabelHeight / 1.3)
 					.style('fill', '#a5cd39')
 
 				// ----------------PATHS----------------
@@ -107,16 +106,16 @@ export default function index() {
 					.attr('stroke', 'steelblue')
 					.attr('stroke-width', 2)
 					.attr('d', RightLine)
-                })
-                
-                                svg
-                                    .append('text')
-                                    .attr('x', centerX)
-                                    .attr('y', centerY / 4 - boardLabelHeight / 2)
-                                    .attr('text-anchor', 'middle')
-                                    .attr('alignment-baseline', 'middle')
-                                    .text('alireza')
-                                    .attr('fill', 'white')
+			})
+
+		svg
+			.append('text')
+			.attr('x', centerX)
+			.attr('y', centerY / 4 - boardLabelHeight / 2)
+			.attr('text-anchor', 'middle')
+			.attr('alignment-baseline', 'middle')
+			.text('alireza')
+			.attr('fill', 'white')
 	}, [])
 
 	return (

@@ -11,11 +11,7 @@
 	}
 }
 
-/* root is about div in app.jsx */
-.root {
-	height: 222vh;
-	background-color: #021216;
-}
+	
 
 .screen-box {
 	animation: screen-box 0.7s ease-in-out;

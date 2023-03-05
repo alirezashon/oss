@@ -29,8 +29,6 @@ function MyD3Component() {
 		const { width, height } = svg.node().getBoundingClientRect()
 		const centerX = width / 2
 		const centerY = height / 2
-		const rectHeight = 44
-		const rectWidth = 266
 		const radius = 222
 		const angle = (2 * Math.PI) / data.length
 		const positions = data.map((d, i) => {
@@ -38,17 +36,22 @@ function MyD3Component() {
 			const y = centerY + radius * Math.sin(i * angle)
 			return [x, y]
 		})
+ const defs = svg.append('defs')
+ const clipPath = defs.append('clipPath').attr('id', 'circle-clip')
 
+ clipPath.append('circle').attr('cx', centerX).attr('cy', centerY).attr('r', 30)
+
+ const boardLabel = svg
+		.append('g')
+		.attr('clip-path', 'url(#circle-clip)')
+		.append('image')
+		.attr('href','/images/me.jpg')
+		.attr('x', centerX - 30)
+		.attr('y', centerY -30)
+		.attr('width', 60)
+		.attr('height',60)
 	
 
-		const boardLabel = svg
-			.append('circle')
-			.attr('cx', centerX)
-			.attr('cy', centerY)
-			// .attr('width', rectWidth)
-			// .attr('height', rectHeight)
-			.attr('r', 70)
-			.attr('fill', '#499b01')
 
 			.on('click', () => {
 				const circleGroup = svg.append('g')
@@ -90,15 +93,8 @@ function MyD3Component() {
 							.attr('rx', 990)
 							.attr('ry', 9)
 							.attr('fill', '#499b01')
-						
-						console.log('created')
 					})
-					
-					
-				
-				
-				
-				
+
 				const imagesCircle = svg
 					.append('g')
 					.append('defs')
@@ -111,17 +107,16 @@ function MyD3Component() {
 					.attr('cx', (d, i) => positions[i][0])
 					.attr('cy', (d, i) => positions[i][1])
 					.attr('r', 30)
-
 			})
-		const boradText = svg
-			.append('text')
-			.attr('x', centerX)
-			.attr('y', centerY)
-			.attr('text-anchor', 'middle')
-			.attr('alignment-baseline', 'middle')
-			.text('alireza akbariovi"c')
-			.attr('fill', 'white')
-		// svg.on('click', (e) => {
+		// const boradText = svg
+		// 	.append('text')
+		// 	.attr('x', centerX)
+		// 	.attr('y', centerY)
+		// 	.attr('text-anchor', 'middle')
+		// 	.attr('alignment-baseline', 'middle')
+		// 	.text('alireza akbariovi"c')
+		// 	.attr('fill', 'white')
+		// // svg.on('click', (e) => {
 		// 	const target = e.target
 		// 	if (!boardLabel.nodes().includes(target)) {
 		// 		svg.selectAll('g').remove()
@@ -141,31 +136,18 @@ function MyD3Component() {
 
 export default MyD3Component
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 // const lines = svg
-		// 	.append('g')
-		// 	.selectAll('line')
-		// 	.data(data)
-		// 	.enter()
-		// 	.append('line')
-		// 	.transition()
-		// 	.duration(500)
-		// 	.attr('x1', centerX)
-		// 	.attr('x2', (d, i) => positions[i][0])
-		// 	.attr('y1', centerY)
-		// 	.attr('y2', (d, i) => positions[i][1])
-		// 	.attr('stroke', '#a5cd39')
-		// 	.attr('stroke-width', 2)
-		// svg.selectAll('g').remove()
+// 	.append('g')
+// 	.selectAll('line')
+// 	.data(data)
+// 	.enter()
+// 	.append('line')
+// 	.transition()
+// 	.duration(500)
+// 	.attr('x1', centerX)
+// 	.attr('x2', (d, i) => positions[i][0])
+// 	.attr('y1', centerY)
+// 	.attr('y2', (d, i) => positions[i][1])
+// 	.attr('stroke', '#a5cd39')
+// 	.attr('stroke-width', 2)
+// svg.selectAll('g').remove()

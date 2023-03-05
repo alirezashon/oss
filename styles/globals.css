@@ -20,7 +20,11 @@
 		margin-right: -50px;
 	}
 }
-
+/* root is about div in app.jsx */
+.root {
+	height: 222vh;
+	background-color: #021216;
+}
 body {
 	overflow-x: hidden;
 	background: #000000;

@@ -5,6 +5,7 @@ import * as d3 from 'd3'
 
 const index = () => {
 	const svgRef = useRef(null)
+//   const [content, setContent] = useState('Default content')
 
 	useEffect(() => {
 		const svg = d3.select(svgRef.current)
@@ -185,7 +186,10 @@ const index = () => {
 			.attr('cx', (d, i) => d.cx)
 			.attr('cy', (d, i) => d.cy)
 			.attr('r', radius)
-			.style('fill', '#FFF')
+			.style('fill', '#021216')
+			
+
+			
 		const images = svg.append('g').selectAll('image').data(circlesPositions)
 
 		images
@@ -197,11 +201,11 @@ const index = () => {
 			.duration(1111)
 			.attr('x', (d, i) => d.cx - radius)
 			.attr('y', (d, i) => d.cy - radius)
-			.attr('width', radius *2)
-			.attr('height', radius *2)
+			.attr('width', radius * 2)
+			.attr('height', radius * 2)
 			.attr('clip-path', 'url(#circleClip)')
 			.attr('xlink:href', (d) => d.src)
-
+		
 		const imagesCircle = svg
 			.append('g')
 			.append('defs')
@@ -213,13 +217,16 @@ const index = () => {
 			.append('circle')
 			.attr('cx', (d, i) => d.cx)
 			.attr('cy', (d, i) => d.cy)
-			.attr('r', radius +11)
+			.attr('r', radius + 11)
+			
+			
 	}, [])
 
 	return (
 		<>
+			
 			<svg
-				style={{ backgroundColor: 'FFFFFF', marginLeft: '15%' }}
+				style={{ marginLeft: '15%' }}
 				ref={svgRef}
 				width='70%'
 				height='40vh'></svg>

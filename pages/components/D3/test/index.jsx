@@ -48,8 +48,8 @@ function MyD3Component() {
 			},
 		]
 		const total = obj.total
-		console.log(total)
-		const data = generateSequence(6936, [])
+
+		const data = generateSequence(37, [])
 
 		const boardLabel = svg
 			.append('rect')

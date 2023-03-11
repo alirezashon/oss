@@ -203,14 +203,14 @@ const index = () => {
 			.attr('y', (d, i) => d.cy - radius)
 			.attr('width', radius * 2)
 			.attr('height', radius * 2)
-			.attr('clip-path', 'url(#circleClip)')
+			.attr('clip-path', 'url(#circleClipMenu)')
 			.attr('xlink:href', (d) => d.src)
 		
 		const imagesCircle = svg
 			.append('g')
 			.append('defs')
 			.append('clipPath')
-			.attr('id', 'circleClip')
+			.attr('id', 'circleClipMenu')
 			.selectAll('circle')
 			.data(circlesPositions)
 			.enter()

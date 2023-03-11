@@ -1,50 +1,86 @@
-import { useEffect, useRef } from 'react'
-import * as d3 from 'd3'
+import React from 'react';
+import * as d3 from 'd3';
 
-function MyPage() {
-  const svgRef = useRef(null)
+const MyComponent = () => {
+  const handleClick = () => {
+    const svg = d3.select('#my-svg');
 
-  useEffect(() => {
-    const svg = d3.select(svgRef.current)
+    // set the x, y position and radius
+    const x = 50;
+    const y = 50;
+    const radius = 20;
 
-    // Define the data for the circles
-    const data = [1, 2, 3, 4, 5]
+    // select the circle that matches the criteria
+    const circle = svg.select('circle')
+      .filter((d, i, nodes) => {
+        const currentCircle = d3.select(nodes[i]);
+        const currentX = currentCircle.attr('cx');
+        const currentY = currentCircle.attr('cy');
+        const currentRadius = currentCircle.attr('r');
+        return currentX === x && currentY === y && currentRadius === radius;
+      });
 
-    // Create the circles and add click event listeners
-    const circles = svg.selectAll('circle')
-      .data(data)
-      .enter()
-      .append('circle')
-      .attr('cx', (d, i) => (i + 1) * 70)
-      .attr('cy', 200)
-      .attr('r', 30)
-      .attr('fill', 'blue')
-      .on('click', function(event, d) {
-        // Handle click event
-        svg.selectAll('circle')
-          .attr('stroke', null)
-          .attr('stroke-width', null)
-
-        d3.select(this)
-          .attr('stroke', 'black')
-          .attr('stroke-width', 2)
-
-        event.stopPropagation()
-      })
-
-    // Add a click event listener to the SVG to hide the border
-    svg.on('click', function(event) {
-      circles.attr('stroke', null)
-      circles.attr('stroke-width', null)
-    })
-  }, [])
+    // apply a style to the selected circle
+    circle.style('fill', 'red');
+  };
 
   return (
-    <svg ref={svgRef} width="400" height="400"></svg>
-  )
-}
+    <div>
+      <svg id="my-svg" width="100" height="100">
+        <circle cx="50" cy="50" r="20" onClick={handleClick} />
+      </svg>
+    </div>
+  );
+};
 
-export default MyPage
+export default MyComponent;
+// import { useEffect, useRef } from 'react'
+// import * as d3 from 'd3'
+
+// function MyPage() {
+//   const svgRef = useRef(null)
+
+//   useEffect(() => {
+//     const svg = d3.select(svgRef.current)
+
+//     // Define the data for the circles
+//     const data = [1, 2, 3, 4, 5]
+
+//     // Create the circles and add click event listeners
+//     const circles = svg.selectAll('circle')
+//       .data(data)
+//       .enter()
+//       .append('circle')
+//       .attr('cx', (d, i) => (i + 1) * 70)
+//       .attr('cy', 200)
+//       .attr('r', 30)
+//       .attr('fill', 'blue')
+//       .on('click', function(event, d) {
+//         // Handle click event
+//         svg.selectAll('circle')
+//           .attr('stroke', null)
+//           .attr('stroke-width', null)
+
+//         d3.select(this)
+//           .attr('stroke', 'black')
+//           .attr('stroke-width', 2)
+
+//         event.stopPropagation()
+//       })
+
+//     // Add a click event listener to the SVG to hide the border
+//     svg.on('click', function(event) {
+//       circles.attr('stroke', null)
+//       circles.attr('stroke-width', null)
+//     })
+//   }, [])
+
+//   return (
+//     <svg ref={svgRef} width="400" height="400"></svg>
+//   )
+// }
+
+// export default MyPage
 // /** @format */
 // import Link from 'next/link'
 // import React, { useRef, useState, useEffect } from 'react'

@@ -2,21 +2,11 @@
 
 import { useRef, useState, useEffect } from 'react'
 import * as d3 from 'd3'
-
+import Test from '../test'
+ 
 const index = () => {
-	// Set up a reference to the SVG element
-	const [issues, setIssues] = useState([])
-
-	useEffect(() => {
-		async function fetchData() {
-			const response = await fetch('/api/test')
-			const d = await response.json()
-			setIssues(d)
-		}
-		fetchData()
-	}, [])
 	const svgRef = useRef()
-
+	const [content, setContent] = useState()
 	useEffect(() => {
 		const svg = d3.select(svgRef.current)
 		const { width, height } = svg.node().getBoundingClientRect()
@@ -24,9 +14,67 @@ const index = () => {
 		const quarterHeight = height / 4
 
 		const data = [
-			{ x: 50, y: 50, imageSrc: '/images/me.jpg', key: 1 },
-			{ x: 150, y: 50, imageSrc: '/images/icons/dashboard.png', key: 2 },
-			{ x: 50, y: 150, imageSrc: '/images/me.jpg', key: 3 },
+			{
+				project: { key: 'SR', banner: '/images/me.jpg' },
+				issues: [
+					{
+						imageSrc: '/images/me.jpg',
+						key: 1,
+						summary: 'CR o BR o beriz zamin , azin b bad bedin berin',
+					},
+					{
+						imageSrc: '/images/icons/dashboard.png',
+						key: 2,
+						summary: 'DR , UI biain berin',
+					},
+					{
+						imageSrc: '/images/me.jpg',
+						key: 3,
+						summary: 'dolar o solar biain narin',
+					},
+				],
+			},
+
+			{
+				project: { key: 'BR', banner: '/images/logo.jpg' },
+				issues: [
+					{
+						imageSrc: '/images/me.jpg',
+						key: 1,
+						summary: 'CR o BR o beriz zamin , azin b bad bedin berin',
+					},
+					{
+						imageSrc: '/images/icons/dashboard.png',
+						key: 2,
+						summary: 'DR , UI biain berin',
+					},
+					{
+						imageSrc: '/images/me.jpg',
+						key: 3,
+						summary: 'dolar o solar biain narin',
+					},
+				],
+			},
+			{
+				project: { key: 'RFC', banner: '/images/icons/internet.png' },
+				issues: [
+					{
+						imageSrc: '/images/me.jpg',
+						key: 1,
+						summary: 'CR o BR o beriz zamin , azin b bad bedin berin',
+					},
+					{
+						imageSrc: '/images/icons/dashboard.png',
+						key: 2,
+						summary: 'DR , UI biain berin',
+					},
+					{
+						imageSrc: '/images/me.jpg',
+						key: 3,
+						summary: 'dolar o solar biain narin',
+					},
+				],
+			},
 		]
 
 		const radius = 133
@@ -40,8 +88,10 @@ const index = () => {
 
 		//  ایجاد اولیه خطوط برای عدم نمایش داخل دایره اصلی
 		const lines = svg.append('g').selectAll('line').data(data).enter()
+		const starItems = svg.append('g')
+
 		// ایجاد دایره اصلی و پیوست تصویر به آن
-		const clipPath = svg
+		const boardLabelImg = starItems
 			.append('defs')
 			.append('clipPath')
 			.attr('id', 'circle-clips')
@@ -51,8 +101,7 @@ const index = () => {
 			.attr('r', 30)
 			.attr('id', 'image')
 
-		const boardLabel = svg
-			.append('g')
+		const boardLabel = starItems
 			.attr('clip-path', 'url(#circle-clips)')
 			.append('image')
 			.attr('href', '/images/me.jpg')
@@ -93,7 +142,7 @@ const index = () => {
 					.attr('width', 60)
 					.attr('height', 60)
 					.attr('clip-path', 'url(#circleClip)')
-					.attr('xlink:href', (d) => d.imageSrc)
+					.attr('xlink:href', (d) => d.project.banner)
 					.on('mouseover', mouseIn)
 					.on('mouseleave', mouseLeave)
 					.on('click', onClick)
@@ -146,16 +195,28 @@ const index = () => {
 				})
 		}
 		// متد ساخت مستطیل جهت نمایش دیتا
-		const createRect = () => {
-			svg
+		const showTickets = () => {
+			const detailsBox = svg.append('g')
+			const issuesBox = detailsBox
 				.append('rect')
 				.attr('x', 1)
 				.attr('y', 7)
-				.attr('width', '77vh')
+				.attr('width', '100vh')
 				.attr('height', '100vh')
 				.attr('fill', '#FFFFFF')
 				.attr('id', 'showIssues')
-			svg
+
+			const issueboard = detailsBox
+				.selectAll('rect')
+				.data(data)
+				.enter()
+				.append('rect')
+				.attr('x', (d, i) => i + 7)
+				.attr('y', (d, i) => i + 1 * 50)
+				.attr('width', 333)
+				.attr('height', 55)
+				.style('fill', '#499b01')
+
 				.selectAll('text')
 				.data(data)
 				.enter()
@@ -163,10 +224,12 @@ const index = () => {
 				.attr('x', (d, i) => i + 30 * 10)
 				.attr('y', (d, i) => i + 30 * 10)
 				.text((d) => d.key)
+				setContent(<Test/>)
+		
 		}
 		// متد های رویداد های دایره های ستاره ای جهت نمایش مستطیل محتوی
 		const mouseIn = () => {
-			createRect()
+			showTickets()
 		}
 		const mouseLeave = () => {
 			svg.select('#showIssues').remove()
@@ -176,7 +239,7 @@ const index = () => {
 			const x = event.clientX
 			const y = event.clientY
 			console.log(`Clicked at (${x}, ${y})`)
-			createRect()
+			showTickets()
 			closeBtn()
 		}
 		svg.on('click', function () {
@@ -191,15 +254,15 @@ const index = () => {
 	// Return the SVG element
 	return (
 		<>
-			{issues.map((issue) => (
-				<p className='text-white'>{issue}</p>
-			))}
 			<svg
 				ref={svgRef}
 				width='100%'
 				height='100vh'>
 				<g />
 			</svg>
+			<div>
+				{content}
+			</div>
 		</>
 	)
 }

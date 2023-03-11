@@ -1,41 +1,43 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
-export default function MyComponent() {
-  const [posts, setPosts] = useState([]);
-  const [selectedPost, setSelectedPost] = useState(null);
+function JiraSearch() {
+  const [searchValue, setSearchValue] = useState('')
+  const [searchResults, setSearchResults] = useState([])
 
-  const fetchPosts = async () => {
-    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-    const data = await response.json();
-    setPosts(data);
-  };
+  const handleSearch = async () => {
+    const jiraUrl = `https://${process.env.JIRA_URL}/rest/api/latest/search?jql=Project = ALIREZA `
+    const jiraHeaders = {     
 
-  const handleClick = async (id) => {
-    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
-    const data = await response.json();
-    setSelectedPost(data);
-  };
+      'Authorization': `Basic ${Buffer.from( `${process.env.USER_NAME}:${process.env.API_TOKEN}`).toString('base64')}`,
+      'Accept': 'application/json'
+    }
+
+    // Make the API call
+    const res = await fetch(jiraUrl, { headers: jiraHeaders })
+    const data = await res.json()
+
+    // Parse the response and extract the issue IDs
+    const issueIds = data.issues.map(issue => issue.key)
+
+    setSearchResults(issueIds)
+  }
 
   return (
-    <div>
-      <button onClick={fetchPosts}>Fetch Posts</button>
-      <div className='text-warning'>
-        {selectedPost && (
-          <div>
-            <h2>{selectedPost.title}</h2>
-            <p>{selectedPost.body}</p>
-            <p>Author ID: {selectedPost.userId}</p>
-          </div>
-        )}
-      </div>
-      <div className='text-white'>
-        {posts.map(post => (
-          <p key={post.id} onClick={() => handleClick(post.id)}>{post.title}</p>
+    <div className='text-white'>
+      <input type="text" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
+      <button onClick={handleSearch}>Search</button>
+      <ul className='text-white'>
+        {searchResults.map(issueId => (
+          <li className='text-white' key={issueId}>{issueId}</li>
         ))}
-      </div>
+      </ul>
     </div>
-  );
+  )
 }
+
+export default JiraSearch
+
+
 
 // /** @format */
 

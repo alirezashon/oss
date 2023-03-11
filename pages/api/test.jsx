@@ -1,8 +1,76 @@
 
+// export default async function handler(req, res) {
+
+
+//   const jiraUrl = `https://${process.env.JIRA_URL}/rest/api/2/search`;
+//   const headers = {
+//     Authorization: `Basic ${Buffer.from(
+//       `${process.env.USER_NAME}:${process.env.API_TOKEN}`
+//     ).toString('base64')}`,
+//     'Content-Type': 'application/json',
+//     'Accept': 'application/json'
+//   };
+
+//   const requestBody = {
+//     jql: 'IMEI ~ "359760091895140"',
+//     fields: ['SUMMARY', 'DESCRIPTION', 'REPORTER'], // Add more fields as needed
+//     maxResults: 1000 // Adjust this value to control the number of issues returned
+//   };
+
+//   try {
+//     const response = await fetch(jiraUrl, {
+//       method: 'POST',
+//       headers,
+//       body: JSON.stringify(requestBody)
+//     });
+
+//     const data = await response.json();
+//     res.status(200).json(data);
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// }
+
+		
+// export default async function handler(req, res) {
+//   const  searchValues  =["359760091895140","359760091814182"];
+
+//   const jql = searchValues
+//     .map((value) => `IMEI ~ ${value}`)
+//     .join(' OR IMEI ~  ');
+// console.log(jql)
+//   const url = `https://${process.env.JIRA_URL}/rest/api/2/search`;
+
+//   const response = await fetch(url, {
+//     method: "POST",
+//     headers: {
+//       Authorization: `Basic ${Buffer.from(
+//             `${process.env.USER_NAME}:${process.env.API_TOKEN}`
+//       ).toString("base64")}`,
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({
+//       jql,
+    
+//     }),
+//   });
+
+//   const data = await response.json();
+
+//   res.status(200).json(data);
+// }
+
+
+
 
 export default async function handler(req, res) {
 	
-    const jql = 'assignee = currentUser()  ';
+ const  searchValues  =[359760091895140,359760091814182,869492053878244];
+
+  const jql = searchValues
+    .map((value) => `IMEI ~ ${value}`)
+    .join(' OR  ');
+console.log(jql)
     // const fields = 'key,resolution,summary,reporter,assignee,labels,components,priority,assignee,reporter,issuetype,customfield_18210,customfield_17501,customfield_10325,created,updated';
 
 	
@@ -18,20 +86,9 @@ export default async function handler(req, res) {
 		}
 	);
 	const data = await response.json();
-      const projectNames = Array.from(new Set(data.issues.map(issue => issue.fields.project.name)));
 
-	
-	// let ali = []
-	// for (let i = 0; i < data.total ; i++) {
-	// 	// console.log(data.issues[i].fields.assignee.avatarUrls['48x48'])
-	// 	// ali.push(data.issues[i].fields.assignee.avatarUrls['48x48'])
-	// 	ali.push(data.issues[i].fields.project.key)
-		
-        
-	// }
-	// let uniqueArr = [...new Set(ali)];
-	res.status(200).json(projectNames);
-	// console.log(uniqueArr)
+	res.status(200).json(data);
+
 } 
 
 

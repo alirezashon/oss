@@ -1,44 +1,41 @@
-import { useState } from 'react'
+import { useState } from 'react';
+import Dropzone from 'react-dropzone';
 
-function JiraSearch() {
-  const [searchValue, setSearchValue] = useState('')
-  const [searchResults, setSearchResults] = useState([])
+export default function Upload() {
+  const [data, setData] = useState([]);
 
-  const handleSearch = async () => {
-    const jiraUrl = `https://${process.env.JIRA_URL}/rest/api/latest/search?jql=Project = ALIREZA `
-    const jiraHeaders = {     
+  const handleFileUpload = async (file) => {
+    const content = await readCsvFile(file);
+    setData(content);
+  };
 
-      'Authorization': `Basic ${Buffer.from( `${process.env.USER_NAME}:${process.env.API_TOKEN}`).toString('base64')}`,
-      'Accept': 'application/json'
-    }
-
-    // Make the API call
-    const res = await fetch(jiraUrl, { headers: jiraHeaders })
-    const data = await res.json()
-
-    // Parse the response and extract the issue IDs
-    const issueIds = data.issues.map(issue => issue.key)
-
-    setSearchResults(issueIds)
-  }
+  const readCsvFile = async (file) => {
+    const text = await file.text();
+    const rows = text.split('\n');
+    const data = rows.map((row) => row.split(','));
+    return data;
+  };
 
   return (
     <div className='text-white'>
-      <input type="text" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
-      <button onClick={handleSearch}>Search</button>
-      <ul className='text-white'>
-        {searchResults.map(issueId => (
-          <li className='text-white' key={issueId}>{issueId}</li>
+      <h1>Upload CSV File</h1>
+      <Dropzone onDrop={(acceptedFiles) => handleFileUpload(acceptedFiles[0])}>
+        {({ getRootProps, getInputProps }) => (
+          <div {...getRootProps()}>
+            <input {...getInputProps()} />
+            <p>Drag and drop a CSV file here, or click to select a file</p>
+          </div>
+        )}
+      </Dropzone>
+      <ul>
+        {data.map((row, index) => ( 
+          <p key={index}>{row.join(', ') }</p>
+          
         ))}
       </ul>
     </div>
-  )
+  );
 }
-
-export default JiraSearch
-
-
-
 // /** @format */
 
 // import React, { useRef, useEffect } from 'react'

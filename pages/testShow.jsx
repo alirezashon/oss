@@ -1,39 +1,73 @@
-import React from 'react';
-import * as d3 from 'd3';
+import { useState } from 'react';
 
-const MyComponent = () => {
-  const handleClick = () => {
-    const svg = d3.select('#my-svg');
 
-    // set the x, y position and radius
-    const x = 50;
-    const y = 50;
-    const radius = 20;
+export default function Home() {
+  const [field, setField] = useState('');
+  const [value, setValue] = useState('');
+  const [tickets, setTickets] = useState([]);
 
-    // select the circle that matches the criteria
-    const circle = svg.select('circle')
-      .filter((d, i, nodes) => {
-        const currentCircle = d3.select(nodes[i]);
-        const currentX = currentCircle.attr('cx');
-        const currentY = currentCircle.attr('cy');
-        const currentRadius = currentCircle.attr('r');
-        return currentX === x && currentY === y && currentRadius === radius;
-      });
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+ 
+	 
+	 
+					
+    const response = await fetch(
+      	`https://${process.env.JIRA_URL}/rest/api/2/search?jql=${encodeURIComponent(
+        `${field}=${value}`
+      )}`,
+      {
+        headers: {
+          Authorization: `Basic ${Buffer.from(
+            `${process.env.USER_NAME}:${process.env.API_TOKEN}`
+          ).toString('base64')}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
 
-    // apply a style to the selected circle
-    circle.style('fill', 'red');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    setTickets(data.issues.map((issue) => issue.key));
   };
 
   return (
     <div>
-      <svg id="my-svg" width="100" height="100">
-        <circle cx="50" cy="50" r="20" onClick={handleClick} />
-      </svg>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Field:
+          <input
+            type="text"
+            placeholder='field'
+            value={field}
+            onChange={(event) => setField(event.target.value)}
+          />
+        </label>
+        <br />
+        <label>
+          Value:
+          <input
+            type="text"
+            placeholder='value'
+            value={value}
+            onChange={(event) => setValue(event.target.value)}
+          />
+        </label>
+        <br />
+        <button type="submit">Search</button>
+      </form>
+      <div className='text-white'>
+        {tickets.map((ticket) => (
+          <p key={ticket}>{ticket}</p>
+        ))}
+      </div>
     </div>
   );
-};
-
-export default MyComponent;
+}
 // import { useEffect, useRef } from 'react'
 // import * as d3 from 'd3'
 

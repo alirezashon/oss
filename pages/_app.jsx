@@ -1,5 +1,6 @@
 /** @format */
 
+import '@/styles/upload.scss'
 import '@/styles/globals.css'
 import '@/styles/charts.css'
 import '@/styles/header.css'
@@ -16,6 +17,7 @@ import '@/styles/dynamic-form.css'
 import '@/styles/food.css'
 import '@/styles/issue.css'
 import '@/styles/ossScreens.css'
+import '@/styles/searchEngine.css'
 import 'primereact/resources/themes/saga-blue/theme.css'
 import 'primereact/resources/primereact.min.css'
 import 'primeicons/primeicons.css'

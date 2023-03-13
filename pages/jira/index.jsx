@@ -1,49 +1,112 @@
-import React, { useState, useEffect } from 'react';
+/** @format */
 
-const Jira = () => {
-  const [data, setData] = useState([]);
+import { useEffect, useRef } from 'react'
+import * as d3 from 'd3'
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        'https://yax.mobinnet.net/rest/api/2/search?jql=project=ALIREZA and status = DONE',
-        {
-          headers: {
-            'Authorization': 'Basic ' + btoa('al.akbari : 1234#D%@li'),
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+const index = () => {
+	const svgRef = useRef()
 
-      const result = await response.json();
-      setData(result.issues);
-    };
+	useEffect(() => {
+		const data = ['text 1', 'text 2', 'text 3']
+		const svg = d3.select(svgRef.current)
 
-    fetchData();
-  }, []);
+		const text = svg
+			.selectAll('text')
+			.data(data)
+			.join('text')
+			.text((d) => d)
+			.attr('x', (d, i) => i * 100 + 50)
+			.attr('y', 50)
+			.attr('font-size', 20)
+			.attr('fill', 'black')
+			.attr('font-size', 30)
+			.style('opacity', 0)
+			.style('cursor', 'pointer')
+		setTimeout(() => {
+			text.style('opacity', 1) 
+		}, 1000)
+		text.on('click', (event, d) => {
+			console.log(`${d} clicked`)
+		})
+	}, [])
 
-  return (
-    <div>
-      {data.map((issue) => (
-        <div key={issue.id}>
-          <h3>{issue.fields.summary}</h3>
-          <p>{issue.fields.description}</p>
-        </div>
-      ))}
-    </div>
-  );
-};
+	return <svg ref={svgRef}></svg>
+}
 
-export default Jira;
+export default index
+// /** @format */
 
+// import { useRouter } from 'next/router'
+// import { useEffect, useRef } from 'react'
+// import * as d3 from 'd3'
 
+// const IndexPage = () => {
+// 	const router = useRouter()
+// 	const svgRef = useRef(null)
 
+// 	useEffect(() => {
+// 		const svg = d3.select(svgRef.current)
 
+// 		const { width, height } = svg.node().getBoundingClientRect()
+// 		const quarterWidth = width / 2
+// 		const quarterHeight = height / 4
 
+// 		const x1 = quarterWidth / 2
+// 		const x2 = quarterWidth * 1.16
+// 		const projectRectWidth = 150
+// 		const projectRectHeight = 50
+// 		let paddingY = 40
+// 		let lineY1 = 40
+// 		let lineY2 = 40
+// 		function generateSequence(n, arr) {
+// 			if (n === 0) return arr
+// 			const last = arr[arr.length - 1]
+// 			const next = last === 1 ? 2 : 1
+// 			return generateSequence(n - 1, [...arr, next])
+// 		}
 
+// 		const treeData = generateSequence(22, [])
+// 		// create a rectangle generator that alternates x position for even and odd indices
 
+// 		// use data method to create rectangles with different Y positions and alternating X positions
+// 		const data = [1, 2, 3, 4, 5]
+// 		const rects = svg
+// 			.selectAll('rect')
+// 			.data(treeData)
+// 			.enter()
+// 			.append('rect')
+// 			.attr('x', (d, i) => (i % 2 === 0 ? x1 : x2))
+// 			.attr('y', (d, i) => {
+// 				if (i % 2 === 0) {
+// 					paddingY += 70
 
+// 					return paddingY
+// 				}
 
+// 				return paddingY
+// 			})
+// 			.attr('width', 50)
+// 			.attr('height', 50)
+// 			.attr('id', (d) => `rect-${d}`)
+// 			.style('fill', 'lightblue')
+// 			.on('click', (event, d) => {
+// 				// update URL and redirect to new URL with ID
+// 				const id = `rect-${d}`
+// 				router.push(`/${id}`)
+// 			})
+// 	}, [])
+
+// 	return (
+// 		<svg
+// 			ref={svgRef}
+// 			width='100%'
+// 			height='900vh'>
+// 			{/* add SVG container */}
+// 		</svg>
+// 	)
+// }
+
+// export default IndexPage
 
 // import axios from 'axios';
 
@@ -60,7 +123,7 @@ export default Jira;
 //     });
 //     return response.data;
 //   }
-  
+
 //   function JiraResults({ jql }) {
 //     const jql = 'project = ALIREZA and status = DONE'
 //     const [jiraData, setJiraData] = useState(null);
@@ -92,10 +155,6 @@ export default Jira;
 //   }
 
 // }
-
-
-
-
 
 // // import React, { useState, useEffect } from 'react';
 // // import axios from 'axios';
@@ -156,14 +215,6 @@ export default Jira;
 
 // // export default JiraIssues;
 
-
-
-
-
-
-
-
-
 // // import React, { useState, useEffect } from 'react';
 // // import Search from './Search';
 
@@ -191,6 +242,3 @@ export default Jira;
 // // };
 
 // // export default JiraData;
-
-
-

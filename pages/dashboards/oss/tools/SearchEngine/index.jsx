@@ -7,7 +7,7 @@ import Tree from '../../../../components/D3/tree'
 const index = () => {
   const [field, setField] = useState('IMEI')
   const [props, setProps] = useState()
-	const [value, setValue] = useState([359760091895140, 359760091814182, 869492053878244, 862343030750005,359760091887998,111111111111111])
+  const [value, setValue] = useState([359760091895140, 359760091814182, 869492053878244, 862343030750005,359760091887998])
 
   const searchIssues = () => {
   setProps({field: field,
@@ -60,7 +60,8 @@ const index = () => {
 			<div className='search-engine-output-box h-100'>
 			<Tree
 			props={{
-				props
+				field:field,
+				value:value,
           }}
 		/>
 			</div>

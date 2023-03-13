@@ -2,10 +2,14 @@
 
 import React, { useRef, useState, useEffect } from 'react'
 import * as d3 from 'd3'
+import { useRouter } from 'next/router'
+
 
 const index = ({props}) => {
 	const [issues, setIssues] = useState([])
 	const svgRef = useRef(null)
+	const router = useRouter()
+
 	useEffect(() => {
 		async function fetchData() {
 			const response = await fetch('/api/searchEngine', {
@@ -65,9 +69,7 @@ const index = ({props}) => {
 			.style('stroke', '#499b01')
 			.style('stroke-width', '2px')
 			.style('fill', '#FFFFFF')
-			.on('click', (event, d) => {
-				setJql('aa')
-			})
+			
 
 		svg
 			.append('text')
@@ -156,7 +158,9 @@ const index = ({props}) => {
 			.style('fill', '#FFFFFF')
 			.style('stroke', '#a5cd39')
 			.style('stroke-width', '3px')
+		
 
+	 
 		paddingY = 40
 
 		const texts = svg
@@ -165,8 +169,6 @@ const index = ({props}) => {
 			.data(issues)
 			.enter()
 			.append('text')
-			.transition()
-			.duration(500)
 			.attr('x', (d, i) =>
 				i % 2 === 0 ? x1 + projectRectWidth / 2 : x2 + projectRectWidth / 2
 			)
@@ -182,7 +184,27 @@ const index = ({props}) => {
 			.attr('alignment-baseline', 'middle')
 			.text((d, i) => d.key)
 			.attr('fill', 'darkgreen')
-
+			.style('cursor', 'pointer')
+			.style('opacity', 0)
+		setTimeout(() => {
+			texts.style('opacity', 1)
+		}, 600)
+			texts
+			.on('click', (event, d) => {
+				// update URL and redirect to new URL with ID
+				let id = d.key
+				switch (id.split('-')[0]) {
+					case 'BR':
+						id = `/screens/issue/screen/BR/${d.key}`
+						router.push(`/${id}`)
+					break
+					case 'BI':
+						id = `/screens/issue/screen/BI/${d.key}`
+						router.push(`/${id}`)
+				}
+			})
+		
+		
 	
 		// .on('click', (event, d) => {
 

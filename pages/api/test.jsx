@@ -65,15 +65,10 @@
 
 export default async function handler(req, res) {
 	
- const  searchValues  =[359760091895140,359760091814182,869492053878244];
-
-  const jql = searchValues
-    .map((value) => `IMEI ~ ${value}`)
-    .join(' OR  ');
-console.log(jql)
+    const jql = 'project = BR  ';
     // const fields = 'key,resolution,summary,reporter,assignee,labels,components,priority,assignee,reporter,issuetype,customfield_18210,customfield_17501,customfield_10325,created,updated';
 
-	
+	// const {jql} = req.body
     const response = await fetch(
 		`https://${process.env.JIRA_URL}/rest/api/2/search?jql=${jql}`,
 		{
@@ -90,6 +85,7 @@ console.log(jql)
 	res.status(200).json(data);
 
 } 
+
 
 
 

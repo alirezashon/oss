@@ -7,8 +7,8 @@ const index = () => {
 	const svgRef = useRef(null)
   const issues = [
 		{
-			"summary": 'alioiiiiioio',
-			"description": 'khodaya khodet komakam kon',
+			summary: 'alioiiiiioio',
+			description: 'khodaya khodet komakam kon',
 			// summary: 'ali',
 			// description: 'ali',
 			// branchCode: 'ali',
@@ -22,8 +22,8 @@ const index = () => {
 			// INCordinatePhone: 'ali',
 		},
 		{
-			"summary": 'noooooooooooooooo',
-			"description": 'it so dirty',
+			summary: 'noooooooooooooooo',
+			description: 'it so dirty',
 			// summary: 'ALIREZA AKBARI',
 			// description: 'ALIREZA AKBARI',
 			// branchCode: 'ALIREZA AKBARI',

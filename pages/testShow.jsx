@@ -1,73 +1,161 @@
-import { useState } from 'react';
+/** @format */
 
+import React, { useRef, useState, useEffect } from 'react'
 
-export default function Home() {
-  const [field, setField] = useState('');
-  const [value, setValue] = useState('');
-  const [tickets, setTickets] = useState([]);
+const index = () => {
+	const [project, setProject] = useState([])
+	const svgRef = useRef(null)
+  const issues = [
+		{
+			"summary": 'alioiiiiioio',
+			"description": 'khodaya khodet komakam kon',
+			// summary: 'ali',
+			// description: 'ali',
+			// branchCode: 'ali',
+			// customer: 'ali',
+			// branchName: 'ali',
+			// agentName: 'ali',
+			// province: 'ali',
+			// city: 'ali',
+			// address: 'ali',
+			// INCordinateName: 'ali',
+			// INCordinatePhone: 'ali',
+		},
+		{
+			"summary": 'noooooooooooooooo',
+			"description": 'it so dirty',
+			// summary: 'ALIREZA AKBARI',
+			// description: 'ALIREZA AKBARI',
+			// branchCode: 'ALIREZA AKBARI',
+			// customer: 'ALIREZA AKBARI',
+			// branchName: 'ALIREZA AKBARI',
+			// agentName: 'ALIREZA AKBARI',
+			// province: 'ALIREZA AKBARI',
+			// city: 'ALIREZA AKBARI',
+			// address: 'ALIREZA AKBARI',
+			// INCordinateName: 'ALIREZA AKBARI',
+			// INCordinatePhone: 'ALIREZA AKBARI',
+		},
+	]
+  useEffect(() => {
+    issues.map(issue => (
+      
+      (async () => {
+        const response = await fetch('/api/ticketing/fetch', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            summary: issue.summary,
+						description: issue.description,
+          }),
+        })
+      })()
+      ))
+    }, [])
+  }
+export default index
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
- 
-	 
-	 
-					
-    const response = await fetch(
-      	`https://${process.env.JIRA_URL}/rest/api/2/search?jql=${encodeURIComponent(
-        `${field}=${value}`
-      )}`,
-      {
-        headers: {
-          Authorization: `Basic ${Buffer.from(
-            `${process.env.USER_NAME}:${process.env.API_TOKEN}`
-          ).toString('base64')}`,
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+// import { useEffect, useState } from 'react'
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+// export default function JiraAPI() {
+// 	const [responses, setResponses] = useState([])
 
-    const data = await response.json();
+// 	useEffect(() => {
+//     const issues = [
+//       {
+//         summary: 'ali',
+//         description: 'ali',
+// 					branchCode: 'ali',
+// 					customer: 'ali',
+// 					branchName: 'ali',
+// 					agentName: 'ali',
+// 					province: 'ali',
+// 					city: 'ali',
+// 					address: 'ali',
+// 					INCordinateName: 'ali',
+// 					INCordinatePhone: 'ali',
+// 				},
+// 				{
+//           summary: 'ALIREZA AKBARI',
+// 					description: 'ALIREZA AKBARI',
+// 					branchCode: 'ALIREZA AKBARI',
+// 					customer: 'ALIREZA AKBARI',
+// 					branchName: 'ALIREZA AKBARI',
+// 					agentName: 'ALIREZA AKBARI',
+// 					province: 'ALIREZA AKBARI',
+// 					city: 'ALIREZA AKBARI',
+// 					address: 'ALIREZA AKBARI',
+// 					INCordinateName: 'ALIREZA AKBARI',
+// 					INCordinatePhone: 'ALIREZA AKBARI',
+// 				},
+// 			]
+// 			// add more issues here
 
-    setTickets(data.issues.map((issue) => issue.key));
-  };
+// 			const newResponses = []
 
-  return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Field:
-          <input
-            type="text"
-            placeholder='field'
-            value={field}
-            onChange={(event) => setField(event.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          Value:
-          <input
-            type="text"
-            placeholder='value'
-            value={value}
-            onChange={(event) => setValue(event.target.value)}
-          />
-        </label>
-        <br />
-        <button type="submit">Search</button>
-      </form>
-      <div className='text-white'>
-        {tickets.map((ticket) => (
-          <p key={ticket}>{ticket}</p>
-        ))}
-      </div>
-    </div>
-  );
-}
+//       async function createIssues() {
+// 			for (const issue of issues) {
+//         const requestBody = {
+//           fields: {
+//             project: {
+//               key: 'BR',
+// 						},
+// 						summary: issue.summary,
+// 						description: issue.description,
+// 						customfield_13211: issue.branchCode,
+// 						customfield_14037: issue.customer,
+// 						customfield_12526: issue.branchName,
+// 						customfield_12565: issue.agentName,
+// 						customfield_12557: issue.province,
+// 						customfield_12558: issue.city,
+// 						customfield_11717: issue.address,
+// 						customfield_12752: issue.INCordinateName,
+// 						customfield_12753: issue.INCordinatePhone,
+// 						issuetype: {
+//               name: 'Digital Signage-MCI',
+// 						},
+// 					},
+// 				}
+
+// 				const response = await fetch(
+//           `https://${process.env.JIRA_URL}/rest/api/2/issue`,
+// 					{
+//             method: 'POST',
+// 						headers: {
+// 							Authorization: `Basic ${Buffer.from(
+// 								`${process.env.USER_NAME}:${process.env.API_TOKEN}`
+// 							).toString('base64')}`,
+// 							Accept: 'application/json',
+// 						},
+// 						body: JSON.stringify(requestBody),
+// 					}
+// 				)
+
+// 				const data = await response.json()
+// 				newResponses.push(data)
+// 			}
+
+// 			setResponses(newResponses)
+// 		}
+
+// 		createIssues()
+// 	}, [])
+
+// 	return (
+// 		<div>
+// 			{responses.map((response) => (
+// 				<div className='text-white' key={response.key}>
+// 					<p>Issue created successfully:</p>
+// 					<p>Key: {response.key}</p>
+// 					<p>Summary: {response.fields.summary}</p>
+// 					<p>Description: {response.fields.description}</p>
+// 				</div>
+// 			))}
+// 		</div>
+// 	)
+// }
 // import { useEffect, useRef } from 'react'
 // import * as d3 from 'd3'
 

@@ -1,0 +1,11 @@
+/* Webfont: BateryRegular */@font-face {
+    font-family: 'Batery';
+    src: url('Batery.eot'); /* IE9 Compat Modes */
+    src: url('Batery.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('Batery.woff') format('woff'), /* Modern Browsers */
+         url('Batery.ttf') format('truetype'); /* Safari, Android, iOS */
+             font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+

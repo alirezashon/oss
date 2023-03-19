@@ -186,10 +186,6 @@ const index = ({props}) => {
 			.attr('fill', 'darkgreen')
 			.style('cursor', 'pointer')
 			.style('opacity', 0)
-		setTimeout(() => {
-			texts.style('opacity', 1)
-		}, 600)
-			texts
 			.on('click', (event, d) => {
 				// update URL and redirect to new URL with ID
 				let id = d.key
@@ -197,12 +193,17 @@ const index = ({props}) => {
 					case 'BR':
 						id = `/screens/issue/screen/BR/${d.key}`
 						router.push(`/${id}`)
-					break
+						break
 					case 'BI':
 						id = `/screens/issue/screen/BI/${d.key}`
 						router.push(`/${id}`)
 				}
 			})
+			setTimeout(() => {
+				texts.style('opacity', 1)
+			}, 600)
+			
+		
 		
 		
 	

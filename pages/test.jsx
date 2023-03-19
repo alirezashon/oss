@@ -1,41 +1,78 @@
 import { useState } from 'react';
-import Dropzone from 'react-dropzone';
 
-export default function Upload() {
-  const [data, setData] = useState([]);
+function FileInput() {
+  const [rows, setRows] = useState([]);
 
-  const handleFileUpload = async (file) => {
-    const content = await readCsvFile(file);
-    setData(content);
-  };
+  const handleFileChange = (event) => {
+    const selectedFile = event.target.files[0];
+    const reader = new FileReader();
 
-  const readCsvFile = async (file) => {
-    const text = await file.text();
-    const rows = text.split('\n');
-    const data = rows.map((row) => row.split(','));
-    return data;
+    reader.onload = (event) => {
+      const csvText = event.target.result;
+      const rows = csvText.split('\n').map((row) => row.split(','));
+		setRows(rows);
+		console.log(rows)
+    };
+
+    reader.readAsText(selectedFile);
   };
 
   return (
-    <div className='text-white'>
-      <h1>Upload CSV File</h1>
-      <Dropzone onDrop={(acceptedFiles) => handleFileUpload(acceptedFiles[0])}>
-        {({ getRootProps, getInputProps }) => (
-          <div {...getRootProps()}>
-            <input {...getInputProps()} />
-            <p>Drag and drop a CSV file here, or click to select a file</p>
-          </div>
-        )}
-      </Dropzone>
+    <div>
+      <input type="file" onChange={handleFileChange} />
       <ul>
-        {data.map((row, index) => ( 
-          <p key={index}>{row.join(', ') }</p>
-          
+        {rows.map((row, rowIndex) => (
+          <li key={rowIndex}>
+            {row.map((cell, cellIndex) => (
+              <span key={cellIndex}>{cell}</span>
+            ))}
+          </li>
         ))}
       </ul>
     </div>
   );
 }
+
+export default FileInput;
+
+// import { useState } from 'react'
+// import Dropzone from 'react-dropzone'
+
+// export default function Upload() {
+// 	const [data, setData] = useState([])
+
+// 	const handleFileUpload = async (file) => {
+// 		const content = await readCsvFile(file)
+// 		setData(content)
+// 		console.log(content)
+// 	}
+
+// 	const readCsvFile = async (file) => {
+// 		const text = await file.text()
+// 		const rows = text.split('\n')
+// 		const data = rows.map((row) => row.split(','))
+// 		return data
+// 	}
+
+// 	return (
+// 		<div className='text-white'>
+// 			<h1>Upload CSV File</h1>
+// 			<Dropzone onDrop={(acceptedFiles) => handleFileUpload(acceptedFiles[0])}>
+// 				{({ getRootProps, getInputProps }) => (
+// 					<div {...getRootProps()}>
+// 						<input {...getInputProps()} />
+// 						<p>Drag and drop a CSV file here, or click to select a file</p>
+// 					</div>
+// 				)}
+// 			</Dropzone>
+// 			<ul>
+// 				{data.map((row, index) => (
+// 					<p key={index}>{row.join(', ')}</p>
+// 				))}
+// 			</ul>
+// 		</div>
+// 	)
+// }
 // /** @format */
 
 // import React, { useRef, useEffect } from 'react'
@@ -44,8 +81,6 @@ export default function Upload() {
 // function MyD3Component() {
 // 	const svgRef = useRef(null)
 
-
-	
 // 	function generateSequence(n, arr) {
 // 		if (n === 0) return arr
 // 		const last = arr[arr.length - 1]
@@ -92,7 +127,7 @@ export default function Upload() {
 // 					.x((d) => d.CX)
 // 					.y((d) => d.CY)
 // 		)
-		
+
 // 		svg
 // 			.selectAll('line')
 // 			.data(data)

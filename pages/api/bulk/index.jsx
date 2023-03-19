@@ -7,28 +7,27 @@ export default async function createIssues(req, res) {
   const JIRA_API_TOKEN = process.env.API_TOKEN
 
   // Array of issues to create
-  const issuesToCreate = [
-    {
+const bodyData = 
+  {
+    
       fields: {
-        project: { key: 'ALIREZA' },
-        summary: 'Issue 1 Summary',
-        description: 'Issue 1 Description',
-        issuetype: { name: 'Bug' }
-      }
-    },
-    {
+        project:{key:"ALIREZA"},
+        summary: "Order stuck in pending",
+            issuetype:{ name: "Lead" }
+      },
+   
+    
       fields: {
-        project: { key: 'ALIREZA' },
-        summary: 'Issue 2 Summary',
-        description: 'Issue 2 Description',
-        issuetype: { name: 'Task' }
-      }
+     project:{key:"ALIREZA"},
+      summary: " pending",
+        issuetype: { name: "Lead" }
+      },
     }
-  ];
+  
 
   // Create issues in bulk
   request.post({
-    url: `${JIRA_SERVER}/rest/api/3/issue/bulk`,
+    url: `${JIRA_SERVER}/rest/api/2/issue/bulk`,
     auth: {
       username: JIRA_USER,
       password: JIRA_API_TOKEN
@@ -36,7 +35,7 @@ export default async function createIssues(req, res) {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ issues: issuesToCreate })
+    body: JSON.stringify(bodyData), 
   }, function(error, response, body) {
     if (error) {
       res.status(500).send(error);

@@ -3,9 +3,9 @@
 export default async function handler(req, res) {
 
  const  searchValues  =req.body.value
-const field = req.body.field
-  const jql = searchValues
-    .map((value) => `${field} ~ ${value}`)
+ const fields = req.body.field
+  const jql = searchValues 
+    .map((value) => `${fields} ~ ${value}`)
     .join(' OR  ');
 
     // const fields = 'key,resolution,summary,reporter,assignee,labels,components,priority,assignee,reporter,issuetype,customfield_18210,customfield_17501,customfield_10325,created,updated';

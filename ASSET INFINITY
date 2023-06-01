@@ -1,0 +1,116 @@
+import com.atlassian.jira.issue.Issue
+import groovyx.net.http.HTTPBuilder;
+import groovyx.net.http.ContentType;
+import static groovyx.net.http.ContentType.URLENC;
+import groovyx.net.http.ContentType
+import com.opensymphony.workflow.InvalidInputException
+import groovyx.net.http.*
+import static groovyx.net.http.ContentType.*
+import static groovyx.net.http.Method.*
+import groovy.json.JsonSlurper 
+import com.atlassian.jira.issue.ModifiedValue
+import com.atlassian.jira.issue.util.DefaultIssueChangeHolder
+import com.atlassian.jira.component.ComponentAccessor
+import com.atlassian.jira.event.type.EventDispatchOption
+import com.atlassian.jira.issue.MutableIssue
+import com.atlassian.jira.user.ApplicationUser;
+//import org.apache.log4j.Category
+def issueManager = ComponentAccessor.getIssueManager();
+Issue issueKey  = issue
+def customFieldManager = ComponentAccessor.getCustomFieldManager()
+//--------------------------GET-CUSTOM-FEILDS-----------------
+def Owner_of_equipment = (String)issue.getCustomFieldValue(customFieldManager.getCustomFieldObject("customfield_12550"))
+def SIM_Owner = (String)issue.getCustomFieldValue(customFieldManager.getCustomFieldObject("customfield_22302"))
+def Accessories_Owner = (String)issue.getCustomFieldValue(customFieldManager.getCustomFieldObject("customfield_22304"))
+def New_CPE_Serial = (String)issue.getCustomFieldValue(customFieldManager.getCustomFieldObject("customfield_21806"))
+def New_ICCID = (String)issue.getCustomFieldValue(customFieldManager.getCustomFieldObject("customfield_21807"))
+def Old_CPE_Serial = (String)issue.getCustomFieldValue(customFieldManager.getCustomFieldObject("customfield_21805"))
+def Old_ICCID = (String)issue.getCustomFieldValue(customFieldManager.getCustomFieldObject("customfield_21808"))
+def Accessories = (String)issue.getCustomFieldValue(customFieldManager.getCustomFieldObject("customfield_22000"))
+//--------------------------API-SAMPLE-----------------------
+def CallAsset(URL,Error){
+     def Key = "KEY STRING"
+     def http = new HTTPBuilder(URL)
+        http.request(GET, ContentType.JSON) {
+            requestContentType = ContentType.JSON
+            request.addHeader("ContentType", "application/json")
+            request.addHeader("Authorization", "bearer ${Key}")
+            def parser = new JsonSlurper()
+            response.success = { resp, JSON ->
+                if (JSON.data.AssetCode) {
+                    return JSON//.data//.AssetCode[0]
+                } 
+                else {
+                    throw new InvalidInputException("${Error}")
+}  }   }  }
+def Asset = "http://10.104.26.112:81/api/viewAsset?userId=3198&"//BASE URL
+//-------TEMPLATE-OF-API-CALLING--->----->>>>>>> ["URL", "ERROR", "ASSET_NAME", ] 
+def AccessoryChek = false
+def AccessoriesPool= [
+  ["${Asset}status=Contractor---Intact&agentCode=13006239&Category=POE", "Accessory does not exist","accessory"],
+  ["${Asset}status=Contractor---Round%20up&agentCode=13006239&Category=POE", "round up Accessory does not exist", "round up accessory"],
+]
+def AssetItems= []
+if (Owner_of_equipment == "استفاده از تجهیزات مبین نت") {
+    AssetItems.add(["${Asset}serial=${New_CPE_Serial.trim()}", "CPE does not exist","Contractor---Intact", "CPE"])
+    AssetItems.add(["${Asset}serial=${New_ICCID.trim()}", "SIM does not exist","Contractor---Intact", "SIM"])
+    AccessoryChek = true
+} 
+else if (Owner_of_equipment == "استفاده از تجهیزات بانک") {
+    AssetItems.add(["${Asset}serial=${Old_CPE_Serial.trim()}", "CPE does not exist","Customer---Round up", "CPE"])
+    if (SIM_Owner == "استفاده از سیم کارت بانک") {
+        AssetItems.add(["${Asset}serial=${Old_ICCID.trim()}", "SIM does not exist","Customer---Round up", "SIM"])
+    } else if (SIM_Owner == "استفاده از سیم کارت مبین نت") {
+        AssetItems.add(["${Asset}serial=${New_ICCID.trim()}", "SIM does not exist","Contractor---Intact", "SIM"])
+    }
+    if (Accessories_Owner == "استفاده از اکسسوری مبین نت") {
+        AccessoryChek = true
+    }  
+}
+else if(Owner_of_equipment == "نصب مودم جدید و جمع آوری مودم بانک"){
+    AssetItems.add(["${Asset}serial=${New_CPE_Serial.trim()}", "CPE does not exist","Contractor---Intact", "CPE",])
+ 	AssetItems.add(["${Asset}serial=${Old_CPE_Serial.trim()}", "CPE does not exist", "Customer---Round up" ,"CPE",]) 
+     if (SIM_Owner == "استفاده از سیم کارت بانک"){
+    AssetItems.add(["${Asset}serial=${Old_ICCID.trim()}", "SIM does not exist", "Customer---Round up" ,"SIM"])
+    }
+    else if (SIM_Owner == "استفاده از سیم کارت مبین نت"){
+    AssetItems.add(["${Asset}serial=${New_ICCID.trim()}", "SIM does not exist", "Contractor---Intact","SIM"])
+    }
+    if (Accessories_Owner == "استفاده از اکسسوری مبین نت"){
+    AccessoryChek=true
+    }
+}
+
+//-------CALLING-API-BY-ITERATE-ARRAY-WITH-CHECK-CONDITIONS----------------
+if(AccessoryChek == true){
+AccessoriesPool.each{ data ->
+def result = CallAsset(data[0], data[1])
+  def logMessage = "${data[2]} code is ${result.data.AssetCode[0]}"
+  def assetCode =  result.data.AssetCode[0].toString() 
+ 	if(!assetCode){
+        log.warn("Agent have not any ${data[2]} in it's pool")
+       throw new InvalidInputException("Agent have not any ${data[2]} in it's pool")
+    }
+  data << logMessage
+  log.warn(logMessage)
+}
+}
+AssetItems.each { data ->
+  def result = CallAsset(data[0], data[1])
+  def logMessage = "${data[3]} code is ${result}"
+  def status =  result.data.Status[0].toString() 
+ 	if(status != data[2]){
+        log.warn("${data[3]} status is not valid")
+       throw new InvalidInputException("${data[3]} status is not valid")
+    }
+  // if (result.data.size > 1) {
+      //  errors << "Please insert ${data[3]} complete" // Add error message to the list        
+   // }
+  data << logMessage
+  log.warn(logMessage)
+    
+}
+
+
+
+

@@ -5,7 +5,7 @@ var jira = new JiraApi({
 	protocol: 'https',
 	host: 'yax.mobinnet.net',
 	username: 'al.akbari',
-	password: '123qweR@123',
+	password: ' ',
 	apiVersion: '2',
 	strictSSL: true,
 });

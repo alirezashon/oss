@@ -13,6 +13,17 @@ interface Post {
   quantity: number
   description: string
 }
+interface Basket {
+  _id: string
+  title: string
+  src: string
+  price: number
+  category: string
+  quantity: number
+  description: string
+  basketDetail: string
+}
+
 interface Posts {
   posts: Post[]
 }
@@ -39,24 +50,48 @@ const PostBox = () => {
       description:
         "this post just created for happy freedome to al.akbarporJojegan",
     },
+ 
   ]
-  const [postStates, setPostStates] = useState<Post[]>()
-  const [basketPost, setBasketPost] = useState<string[]>()
-  const checkBasket = (basket: string[]) => {}
+  const [postStates, setPostStates] = useState<Post[]>(posts)
+  const [basketPost, setBasketPost] = useState<Post[]>([])
+
   useEffect(() => {
-    const Basketestor:string[] = JSON.parse(localStorage.getItem('#B!@%$&K&E^T*O(s&') || '[]')
-    if (Basketestor) {
-       const basketSide = Basketestor?.map((store)=> (
-           store?.split('*2%2&7(7)5%5!1@2')[0] || ''
-        ))
-        console.log(Basketestor)
-        setBasketPost(basketSide)
-    }
+    const checkBasket = ( ) => {
+      const basketestor: string[] = JSON.parse(
+        localStorage.getItem("#B!@%$&K&E^T*O(s&") || "[]"
+      )
+      const ali  = []
+      for(let basket of basketestor){
+        const item =
+        postStates.filter((item)=> item._id === basket.split("*2%2&7(7)5%5!1@2")[0])
+        ali.push(item)
+      }
+      // const basketIn = basketestor.map((store)=>{
+      //   const postData = postStates.filter((item)=> item._id === store.split("*2%2&7(7)5%5!1@2")[0])
+        
+      // })
+      // console.log(basketIn)
+      setBasketPost(ali)
+      console.log(ali)
+    //   if (basketestor) {
+    //     const posts = postStates.filter(
+    //       (item) =>
+    //  basketestor.some((id) => id.startsWith(item._id))
+    //     )
+    //     const basketin = postStates.filter((item) =>
+    //       basketestor.some((id) => id.startsWith(item._id))
+    //     )
+    //     setPostStates(posts)
+    //     setBasketPost(basketin)
+    //   }
+  
+  }
+    checkBasket()
   }, [postStates])
 
   return (
     <div className={styles.postsBox}>
-      {basketPost}
+      {basketPost.length}
       <div className={styles.innerPostsBox}>
         {posts.map((obj, index: number) => (
           <div className={styles.postBox} key={obj._id}>
@@ -69,20 +104,22 @@ const PostBox = () => {
                 height={200}
                 className={styles.image}
               />
-              {/* {postStates[index].isAddToBasket ? ( */}
-              <div className={styles.priceBasketBox}>
-                <div className={styles.innerPriceBasketBox}>
-                  <div className={styles.priceBasket}>
-                    <p className={styles.productBasketPrice}>{obj.price}</p>
-                    <div className={styles.productBasketicon}>
-                      <button onClick={() => Remove(obj._id)}>-</button>
-                      <button onClick={() => Add(obj._id)}>
-                        {/* <span>{postStates[index].quantity}</span> */}+
-                      </button>
+              {
+                // basketPost?.length > 0 ?
+
+                <div className={styles.priceBasketBox}>
+                  <div className={styles.innerPriceBasketBox}>
+                    <div className={styles.priceBasket}>
+                      <p className={styles.productBasketPrice}>{obj.price}</p>
+                      <div className={styles.productBasketicon}>
+                        <button onClick={() => Remove(obj._id)}>-</button>
+                        <button onClick={() => Add(obj._id)}>+</button>
+                        <span>2</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              }
               {/* ) : ( */}
               <div className={styles.priceBasketBox}>
                 <div className={styles.innerPriceBasketBox}>

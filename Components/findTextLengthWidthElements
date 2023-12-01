@@ -1,0 +1,178 @@
+/** @format */
+
+import { useState, useEffect } from 'react'
+interface Option {
+	name: string
+	options?: string[] | Option[]
+}
+interface MenuItems {
+	name: string
+	options: string[] | Option[]
+}
+const SelectList = () => {
+	const [maxWidth, setMaxWidth] = useState<number>(0)
+
+	const menuItems: MenuItems[] = [
+		{
+			name: 'محصولات',
+			options: [
+				{ name: 'ازینا', options: ['گیر خامه عصرشون', 'تیپ یک یکشون'] },
+				{
+					name: 'ازونا',
+					options: [
+						{ name: 'پرتقالوزادنن', options: ['دوشواریشکن'] },
+						{ name: 'همهدارن', options: ['ایناندارن'] },
+					],
+				},
+			],
+		},
+		{ name: 'سفارشی سازی', options: ['سرتاتشو', 'فقط وسطاشو', 'بغلاشو'] },
+		{ name: 'پروفایل کاربری', options: ['تاریخچه خرید', 'مدیریت '] },
+		{ name: 'خدمات', options: ['ماساژ غضروف'] },
+		{ name: 'تماس با ما', options: ['0700600500137'] },
+		{ name: 'درباره ی ما', options: ['همیشه خفناسا'] },
+	]
+
+	const [selectedItem, setSelectedItem] = useState('')
+	const [isOpen, setIsOpen] = useState(false)
+
+	useEffect(() => {
+		// Calculate the maximum width based on the length of the longest text
+		const maxLength = menuItems.reduce(
+			(max, menuItem) =>
+				Math.max(
+					max,
+					menuItem.name.length,
+					...(menuItem.options || []).map((option) =>
+						typeof option === 'string' ? option.length : option.name.length
+					)
+				),
+			0
+		)
+
+		// Set a padding or additional space if needed
+		const padding = 16
+
+		setMaxWidth(maxLength * 8 + padding) // Assuming an average width of 8 pixels per character
+	}, [menuItems])
+
+	const handleSelectChange = (value: string) => {
+		setSelectedItem(value)
+		setIsOpen(false)
+	}
+
+	const toggleOptions = () => {
+		setIsOpen(!isOpen)
+	}
+
+	return (
+		<>
+			<div>
+				<div>
+					<label>Select an item:</label>
+					<div className={`select-container ${isOpen ? 'open' : ''}`}>
+						<div
+							className='select'
+							onClick={toggleOptions}
+							style={{ maxWidth: `${maxWidth}px` }}>
+							<div className='selected-item'>
+								{selectedItem || 'Select Item'}
+							</div>
+							{isOpen && (
+								<div className='options'>
+									{menuItems.map((menuItem, index) => (
+										<div
+											key={index}
+											className='option'
+											style={{ width: `${menuItem.name.length * 8}px` }} // Adjust width based on text length
+										>
+											{menuItem.name}
+											{menuItem.options && menuItem.options.length > 0 && (
+												<div className='nested-options'>
+													{menuItem.options.map((option, optionIndex) => (
+														<div
+															key={optionIndex}
+															className='nested-option'
+															onClick={() =>
+																handleSelectChange(
+																	typeof option === 'string'
+																		? option
+																		: option.name
+																)
+															}>
+															{typeof option === 'string'
+																? option
+																: option.name}
+														</div>
+													))}
+												</div>
+											)}
+										</div>
+									))}
+								</div>
+							)}
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<style jsx>{`
+				.select-container {
+					position: relative;
+					width: 200px;
+					z-index: 2;
+					background-color: yellow;
+				}
+
+				.select {
+					border: 1px solid #ccc;
+					cursor: pointer;
+					display: flex;
+					flex-direction: column;
+					background-color: yellow;
+					text-align: center;
+				}
+
+				.selected-item {
+					background: linear-gradient(
+						90deg,
+						rgb(230, 226, 173),
+						rgb(253, 113, 113),
+						rgb(220, 230, 173)
+					);
+					padding: 1vh;
+				}
+
+				.options {
+					display: none;
+					position: absolute;
+					top: 100%;
+					left: 0;
+					right: 0;
+					border: 1px solid #ccc;
+				}
+				
+				.option {
+					background-color: yellow;
+					padding: 10px;
+					border-bottom: 1px solid #ccc;
+				}
+
+				.nested-options {
+					padding-left: 20px;
+				}
+
+				.nested-option {
+					padding: 5px;
+					cursor: pointer;
+				}
+
+				.select-container.open .options {
+					display: block;
+				}
+			`}</style>
+		</>
+	)
+}
+
+export default SelectList

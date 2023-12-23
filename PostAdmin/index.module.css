@@ -1,0 +1,98 @@
+/* Add your existing styles here */
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.actionBox {
+  background-color: #f0f0f0;
+  padding: 10px;
+}
+
+.searchBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.searchBox input {
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.add {
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+}
+
+.tableContainer {
+  margin-top: 20px;
+}
+
+.tableContainer table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableContainer table th,
+.tableContainer table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.actionButton {
+  cursor: pointer;
+  background-color: #28a745;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+}
+
+.actionContainer {
+  width: 60vw;
+  height: 80vh;
+  background: linear-gradient(
+    9deg,
+    rgba(175, 197, 123, 0.9),
+    rgba(180, 226, 73, 0.9),
+    rgba(59, 83, 3, 0.9)
+  );
+  margin-left: 20vw;
+  top: 10vh;
+  
+  position: absolute;
+}
+
+.actionContainer form {
+  margin-top: 10px;
+  display: flex;
+}
+.actionContainer form div {
+    background-color: #007bff;
+ }
+
+.actionContainer form label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.actionContainer form input {
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.delete {
+  cursor: pointer;
+  background-color: #dc3545;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+}

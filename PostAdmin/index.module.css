@@ -1,13 +1,25 @@
-/* Add your existing styles here */
-
 .container {
-  width: 80%;
-  margin: 0 auto;
+  width: 100vw;
+  background: repeating-radial-gradient(
+    rgba(37, 150, 206, 0.853),
+    rgba(154, 235, 218, 0.8),
+    rgba(161, 216, 252, 0.8)
+  );
+  padding: 4vh;
 }
 
 .actionBox {
-  background-color: #f0f0f0;
-  padding: 10px;
+  background: repeating-linear-gradient(
+    7deg,
+    rgba(128, 188, 208, 0.853),
+    rgba(229, 255, 233, 0.8),
+    rgba(219, 250, 231, 0.8)
+  );
+  border: ridge 0.7vh;
+  padding: 1vh;
+  border-radius: 2vh;
+  border-image: linear-gradient(to left, #f8feff, #ff6608, #f8feff);
+  border-image-slice: 11;
 }
 
 .searchBox {
@@ -41,20 +53,22 @@
 
 .tableContainer table th,
 .tableContainer table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
+  border: .4vh solid #ddd;
+  padding: 1vh;
+  text-align: center;
+
 }
 
 .actionButton {
   cursor: pointer;
   background-color: #28a745;
   color: #fff;
-  padding: 5px 10px;
+  padding: 1vh;
   border: none;
   border-radius: 4px;
 }
 
+/* Second Parren styles start */
 .actionContainer {
   width: 60vw;
   height: 80vh;
@@ -66,19 +80,23 @@
   );
   margin-left: 20vw;
   top: 10vh;
-  
+
   position: absolute;
 }
 
 .actionContainer form {
-  margin-top: 10px;
-  display: flex;
+  background: linear-gradient(rgba(222, 77, 225, 0.9), rgba(124, 234, 54, 0.8));
+  display: grid;
+  grid-template-columns: repeat(5, 20%);
+  grid-template-rows: repeat(7,14vh);
 }
 .actionContainer form div {
-    background-color: #007bff;
- }
+  margin: 1vh;
+  background-color: #28a745;
+}
 
 .actionContainer form label {
+
   margin-right: 10px;
   font-weight: bold;
 }

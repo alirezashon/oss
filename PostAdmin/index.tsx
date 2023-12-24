@@ -1,6 +1,7 @@
+import Image from "next/image"
 import React, { useState } from "react"
 import styles from "./index.module.css"
-
+import Search from '../../Components/Form/Search'
 interface Story {
   _id: string
   title: string
@@ -9,22 +10,22 @@ interface Story {
   category: string
   quantity: number
   description: string
-  size:string
-  color:string
+  size: string
+  color: string
   model: string
 }
 
 const initialFormData: Story = {
-    _id: "string",
-      title: "string",
-      src: "/images/alireza.jpg",
-      price: 55,
-      category: "string",
-      quantity: 77,
-      description: "string",
-      size: "77",
-      color: "solati",
-      model: "azinjadida",
+  _id: "string",
+  title: "string",
+  src: "/images/alireza.jpg",
+  price: 55,
+  category: "string",
+  quantity: 77,
+  description: "string",
+  size: "77",
+  color: "solati",
+  model: "azinjadida",
 }
 
 const PostAdmin: React.FC = () => {
@@ -42,7 +43,7 @@ const PostAdmin: React.FC = () => {
       quantity: 77,
       description: "string",
       size: "77",
-      color: "solati",
+      color: "pink",
       model: "azinjadida",
     },
   ]
@@ -82,9 +83,34 @@ const PostAdmin: React.FC = () => {
             <tbody>
               {data.map((post, index) => (
                 <tr key={post._id}>
-                  {Object.values(post).map((item, i) => (
-                    <td key={i}>{item}</td>
-                  ))}
+                  {Object.values(post).map((item, index) =>
+                    index === 2 ? (
+                      <td key={index}>
+                        <Image
+                          src={`${item}`}
+                          alt={`${post.title}`}
+                          width={77}
+                          height={77}
+                        />
+                      </td>
+                    ) : index === 8 ? (
+                      <td>
+                        <input
+                          value={`${item}`}
+                          type={"color"}
+                          style={{
+                            width: "3vh",
+                            height: "3vh",
+                            backgroundColor: `${item}`,
+                            borderRadius: "2vh",
+                          }}
+                        />
+                        :
+                      </td>
+                    ) : (
+                      <td key={index}>{item}</td>
+                    )
+                  )}
                   <td>
                     <div
                       className={styles.actionButton}
@@ -103,22 +129,26 @@ const PostAdmin: React.FC = () => {
       {openActions !== -1 && (
         <div className={styles.actionContainer}>
           <form>
-            {Object.entries(formData).map(([key, value]) => (
-              <div key={key}>
-                <label>{key}</label>
-                <input
-                  type="text"
-                  value={value}
-                  onChange={(e) =>
-                    setFormData((prevData) => ({
-                      ...prevData,
-                      [key]: e.target.value,
-                    }))
-                  }
-                />
-              </div>
-            ))}
-            <input type={'submit'}/>
+            {Object.entries(formData).map(([key, value], index) =>
+              index === 2 ? (
+                <Image src={`${value}`} alt={`${key}`} width={77} height={77} />
+              ) : (
+                <div style={{}} key={key}>
+                  <label>{key}</label>
+                  <input
+                    type="text"
+                    value={value}
+                    onChange={(e) =>
+                      setFormData((prevData) => ({
+                        ...prevData,
+                        [key]: e.target.value,
+                      }))
+                    }
+                  />
+                </div>
+              )
+            )}
+            <input type={"submit"} />
             <button className={styles.delete}>Delete</button>
           </form>
         </div>
@@ -128,95 +158,3 @@ const PostAdmin: React.FC = () => {
 }
 
 export default PostAdmin
-
-// import React, { useState } from "react"
-// import styles from "./index.module.css"
-
-// interface Story {
-//   _id: string
-//   title: string
-//   src: string
-//   price: number
-//   category: string
-//   quantity: number
-//   description: string
-//   seen?: boolean
-// }
-// const data = [
-//   {
-//     _id: "string",
-//     title: "string",
-//     src: "/images/alireza.jpg",
-//     price: 55,
-//     category: "string",
-//     quantity: 77,
-//     description: "string",
-//     size: "77",
-//     color: "solati",
-//     model: "azinjadida",
-//   },
-//   {
-//     _id: "string",
-//     title: "string",
-//     src: "/images/alireza.jpg",
-//     price: 55,
-//     category: "string",
-//     quantity: 77,
-//     description: "string",
-//     size: "77",
-//     color: "solati",
-//     model: "azinjadida",
-//   },
-//   {
-//     _id: "string",
-//     title: "string",
-//     src: "/images/alireza.jpg",
-//     price: 55,
-//     category: "string",
-//     quantity: 77,
-//     description: "string",
-//     size: "77",
-//     color: "solati",
-//     model: "azinjadida",
-//   },
-// ]
-
-// const PostAdmin: React.FC = () => {
-//   const [text, setText] = useState<string>("")
-//   const [openActions, setOpenAction] = useState<number>(-1)
-//   return (
-//     <>
-//       <div className={styles.container}>
-//         <div className={styles.actionBox}>
-//           <div className={styles.searchBox}>
-//             <input onChange={(e) => setText(e.target.value)} />
-//             <input type={"submit"} />
-//             <div className={styles.add} onClick={}>
-//               Add
-//             </div>
-//           </div>
-//         </div>
-//         <div className={styles.tableContainer}>
-//           <table>
-//             <thead>
-//               {Object.keys(data[0]).map((post) => (
-//                 <tr>
-//                   <th>{post}</th>
-//                 </tr>
-//               ))}
-//             </thead>
-//             <tbody>
-//               {data.map((post) =>
-//                 Object.values(post).map((item) => <td>{item}</td>)
-//               )}
-//             </tbody>
-//           </table>
-//         </div>
-//       </div>
-//       {/* open item for action */}
-
-//       {openActions !== -1 && <div className={styles.actionContainer}></div>}
-//     </>
-//   )
-// }
-// export default PostAdmin

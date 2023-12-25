@@ -1,7 +1,9 @@
 import Image from "next/image"
-import React, { useState } from "react"
+import React, { MouseEvent, useState } from "react"
 import styles from "./index.module.css"
-import Search from '../../Components/Form/Search'
+import Search from "../../Components/Form/Search"
+import { MdAddCircle } from "react-icons/md"
+
 interface Story {
   _id: string
   title: string
@@ -32,6 +34,10 @@ const PostAdmin: React.FC = () => {
   const [text, setText] = useState<string>("")
   const [openActions, setOpenAction] = useState<number>(-1)
   const [formData, setFormData] = useState<Story>(initialFormData)
+  const [selectedColor, setSelectedColor] = useState("#3498db")
+  const handleColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedColor(event.target.value)
+  }
 
   const data = [
     {
@@ -63,12 +69,9 @@ const PostAdmin: React.FC = () => {
       <div className={styles.container}>
         <div className={styles.actionBox}>
           <div className={styles.searchBox}>
-            <input onChange={(e) => setText(e.target.value)} />
-            <input type={"submit"} />
-            <div className={styles.add} onClick={handleAddClick}>
-              Add
-            </div>
+            <Search />
           </div>
+            <MdAddCircle className={styles.add} size={"6vh"} />
         </div>
         <div className={styles.tableContainer}>
           <table>
@@ -95,17 +98,17 @@ const PostAdmin: React.FC = () => {
                       </td>
                     ) : index === 8 ? (
                       <td>
-                        <input
-                          value={`${item}`}
-                          type={"color"}
-                          style={{
-                            width: "3vh",
-                            height: "3vh",
-                            backgroundColor: `${item}`,
-                            borderRadius: "2vh",
-                          }}
-                        />
-                        :
+                          <input
+                            type="color"
+                            value={selectedColor}
+                            onChange={handleColorChange}
+                            className={styles.colorInput}
+                          />
+                          <div
+                            className={`${styles.colorPreview} ${styles.selected}`}
+                            style={{ backgroundColor: selectedColor }}
+                          ></div>
+                      
                       </td>
                     ) : (
                       <td key={index}>{item}</td>

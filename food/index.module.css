@@ -1,0 +1,40 @@
+.menuBox {
+  width: 100vw;
+  display: flex;
+  direction: rtl;
+  background-color: aquamarine;
+}
+.daysSection {
+  width: 72%;
+}
+.day {
+  width: 100%;
+  background-color: blueviolet;
+  border-bottom: 1vh ridge rgb(255, 246, 229);
+  height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.foodSection {
+width: 78%;
+}
+.dayFoods {
+  display: flex;
+  background-color: rgb(243, 120, 120);
+  height: 30vh;
+  border-bottom: 1vh ridge wheat;
+  padding: 1vh 0;
+  
+  overflow-x: scroll;
+}
+.foodBox {
+  background-color: yellow;
+  margin: 0 1vh;
+}
+.foodImage {
+  width: 25vh;
+  height: 20vh;
+}
+   

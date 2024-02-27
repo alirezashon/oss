@@ -9,34 +9,38 @@ import Orders from "./Orders/index"
 import Favorites from "./Favorites/index"
 import LastSeen from "./LastSeen/index"
 const Profile = () => {
-  const [state, setState] = useState()
-  const icons = [
-    {
-      tag: <Orders />,
-      name: "سفارشات",
-    },
-    { tag: <Favorites />, name: "مورد علاقه" },
-    {
-      tag: <Chat />,
-      name: "گفتگو",
-    },
-    {
-      tag: <Address />,
-      name: "آدرس ها",
-    },
-    {
-      tag: <LastSeen />,
-      name: "بازدید های اخیر",
-    },
-    {
-      tag: <Notification />,
-      name: "پیغام ها",
-    },
+  const [state, setState] = useState("سفارشات")
+  const items = [
+    "سفارشات",
+    "مورد علاقه",
+    "گفتگو",
+    "آدرس ها",
+    "بازدید های اخیر",
+    "پیغام ها",
   ]
   return (
     <>
       <div className={styles.container}>
-        <Items />
+        <div className={styles.itemsBox}>
+          {items.map((item) => (
+            <>
+              <div onClick={() => setState(item)}>{item}</div>
+            </>
+          ))}
+        </div>
+        {state === "سفارشات" ? (
+          <Orders />
+        ) : state === "مورد علاقه" ? (
+          <Favorites />
+        ) : state === "گفتگو" ? (
+          <Chat />
+        ) : state === "آدرس ها" ? (
+          <Address />
+        ) : state === "بازدید های اخیر" ? (
+          <LastSeen />
+        ) : (
+          state === "پیغام ها" && <Notification />
+        )}
         <div className={styles.topBox}>
           <div className={styles.profileBox}>
             <Image
@@ -48,9 +52,6 @@ const Profile = () => {
             <p>Name</p>
             <p>7/3/1380</p>
           </div>
-        </div>
-        <div className={styles.orderHistory}>
-          <div className={styles.orderBox}>kaktoz</div>
         </div>
       </div>
     </>
